@@ -1,18 +1,18 @@
 ````md
 
-\\# Architecture overview
+\\\\# Architecture overview
 
 
 
-This folder contains the high-level architecture summary for the \\\*\\\*new-yacoub\\\*\\\* thesis system.
+This folder contains the high-level architecture summary for the \\\\\\\*\\\\\\\*new-yacoub\\\\\\\*\\\\\\\* thesis system.
 
 
 
-The thesis is intentionally built around \\\*\\\*one small, complete, end-to-end IoT scenario\\\*\\\* so that it stays measurable, explainable, and finishable within the available time.
+The thesis is intentionally built around \\\\\\\*\\\\\\\*one small, complete, end-to-end IoT scenario\\\\\\\*\\\\\\\* so that it stays measurable, explainable, and finishable within the available time.
 
 
 
-\\## Core system flow
+\\\\## Core system flow
 
 
 
@@ -20,15 +20,15 @@ The thesis is intentionally built around \\\*\\\*one small, complete, end-to-end
 
 Sensor event
 
-\&#x20; -> Middleware
+\\\&#x20; -> Middleware
 
-\&#x20; -> n8n workflow
+\\\&#x20; -> n8n workflow
 
-\&#x20; -> Validation / Approval
+\\\&#x20; -> Validation / Approval
 
-\&#x20; -> Action execution
+\\\&#x20; -> Action execution
 
-\&#x20; -> Metrics logging
+\\\&#x20; -> Metrics logging
 
 ````
 
@@ -42,19 +42,19 @@ Sensor event
 
 Temperature event
 
-\&#x20; -> Python middleware receives or generates the event
+\\\&#x20; -> Python middleware receives or generates the event
 
-\&#x20; -> Middleware pushes the event to n8n through webhook flow
+\\\&#x20; -> Middleware pushes the event to n8n through webhook flow
 
-\&#x20; -> n8n evaluates whether fan action is needed
+\\\&#x20; -> n8n evaluates whether fan action is needed
 
-\&#x20; -> Safety layer validates the output
+\\\&#x20; -> Safety layer validates the output
 
-\&#x20; -> Approval is required if the action is risky or malformed
+\\\&#x20; -> Approval is required if the action is risky or malformed
 
-\&#x20; -> Middleware executes /fan/on or /fan/off
+\\\&#x20; -> Middleware executes /fan/on or /fan/off
 
-\&#x20; -> Latency and resource metrics are recorded
+\\\&#x20; -> Latency and resource metrics are recorded
 
 ```
 
@@ -132,7 +132,7 @@ Purpose:
 
 
 
-\### `cognitive\\\_logic/`
+\### `cognitive\\\\\\\_logic/`
 
 
 
@@ -158,7 +158,7 @@ It is not a full cognitive architecture project.
 
 
 
-\### `safety\\\_layer/`
+\### `safety\\\\\\\_layer/`
 
 
 
@@ -180,7 +180,7 @@ Purpose:
 
 
 
-\### `shared\\\_interfaces/`
+\### `shared\\\\\\\_interfaces/`
 
 
 
@@ -305,6 +305,10 @@ The first implementation uses a \*\*push-based\*\* communication flow:
 
 
 \## Scope note
+
+\## aws
+
+
 
 
 
