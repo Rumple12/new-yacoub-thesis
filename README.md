@@ -93,15 +93,31 @@ What exists now:
 - Antigravity workspace rules/workflows/skill
 - narrowed implementation plan
 - ongoing scope and report-support notes
+- local n8n Docker baseline
 
 What does **not** exist yet:
 
-- Docker baseline
 - middleware implementation
 - workflow exports
 - safety implementation
 - measurement scripts
 - evaluation results
+
+---
+
+## Local n8n baseline
+
+The Step 3 local self-hosted n8n baseline lives in `infrastructure/docker/`.
+
+Quick start:
+
+```powershell
+cd infrastructure/docker
+Copy-Item .env.example .env
+docker compose up -d
+```
+
+Then open `http://localhost:5678`.
 
 ---
 

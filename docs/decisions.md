@@ -352,6 +352,35 @@ Any risky physical action must pass through:
 
 
 
+## D-011 - local n8n baseline uses Docker Compose with default local storage
+
+**Decision:**
+
+The first local n8n baseline uses Docker Compose with one pinned n8n container
+image: `n8nio/n8n:1.123.37`.
+
+The first baseline uses n8n's default local SQLite-backed storage persisted in
+a Docker volume.
+
+**Reason:**
+
+This is the smallest reproducible local baseline for Step 3 and keeps the
+project focused on Yacoub's measurable workflow runtime before adding
+middleware, workflows, or hardware complexity.
+
+**Impact:**
+
+- PostgreSQL is deferred unless the first baseline proves it is necessary.
+- Prometheus/Grafana are not part of the baseline.
+- MCP is not part of phase 0.
+- Raspberry Pi validation remains a later Tier 1.5 step.
+
+
+
+---
+
+
+
 ## Out-of-scope decisions currently locked
 
 
