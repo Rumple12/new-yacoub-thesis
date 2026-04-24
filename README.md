@@ -1,5 +1,7 @@
 # new-yacoub-thesis
 
+For the full development/report process, see: [docs/plans/new-yacoub-14-step-process.md](docs/plans/new-yacoub-14-step-process.md)
+
 ## What this repository is
 
 This repository contains the implementation, planning documents, and report-support material for the **new-yacoub** bachelor thesis plan.
