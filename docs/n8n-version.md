@@ -10,12 +10,13 @@ report writing.
 
 ## Status
 
-Version pin status: **pinned for local Docker baseline, runtime verification pending**
+Version pin status: **runtime verified locally on Windows with Docker Desktop**
 
 Docker Hub metadata verified that the selected image tag exists on 2026-04-24.
-The local environment used to create this baseline did not have the Docker CLI
-installed, so the first actual `docker compose up` run must still be recorded
-after testing on a Docker-enabled machine.
+
+Runtime verification succeeded locally on Windows with Docker Desktop on
+2026-04-25. n8n opened at `http://localhost:5678` and displayed the owner
+account setup screen.
 
 ---
 
@@ -43,10 +44,13 @@ Date pinned: `2026-04-24`
 ## Verification notes
 
 - Tag existence verified through Docker Hub tag metadata on 2026-04-24.
-- Local Docker runtime verification is still required because Docker was not
-  installed in the current environment.
-- First successful local startup should be recorded with terminal output or a
-  screenshot before moving beyond the local baseline.
+- Initial runtime verification attempt on 2026-04-25 was blocked because the
+  `docker` command was not available in PowerShell.
+- Docker Desktop was then installed locally on Windows.
+- Runtime verification succeeded on 2026-04-25 with `docker compose up -d`.
+- Browser verification succeeded at `http://localhost:5678`.
+- Screenshot proof: `infrastructure/docker/evidence/n8n-localhost-5678-success-2026-04-25.png`.
+- Evidence log: `infrastructure/docker/evidence/n8n-runtime-proof-2026-04-25.txt`.
 
 ---
 

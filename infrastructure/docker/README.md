@@ -17,9 +17,11 @@ The baseline is intentionally small:
 
 - Docker Desktop or Docker Engine with Docker Compose support
 
-This repository environment did not have the Docker CLI available when the
-baseline was created, so the image tag was verified through Docker Hub metadata
-and still needs runtime verification on a Docker-enabled machine.
+The baseline was runtime verified locally on Windows with Docker Desktop on
+2026-04-25. n8n opened at `http://localhost:5678` and displayed the owner
+account setup screen.
+
+Verification evidence is stored in `infrastructure/docker/evidence/`.
 
 ## First Run
 
