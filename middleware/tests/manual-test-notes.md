@@ -7,7 +7,7 @@ Scope limits:
 - mock sensor data only
 - simulated fan action only
 - no real GPIO
-- no shared JSON schemas yet
+- shared JSON schemas are defined in Step 5 but are not enforced by this Step 4 middleware yet
 - no deterministic n8n workflow yet
 - no agent workflow yet
 - no safety layer yet
@@ -37,6 +37,10 @@ python -m middleware.api.app
 
 `N8N_WEBHOOK_URL` is intentionally optional. It should stay empty until the
 Step 6 n8n workflow exists.
+
+Step 5 defines the shared JSON schema files under `shared_interfaces/`, but
+these manual tests still exercise the Step 4 middleware behavior. The
+middleware does not perform JSON Schema validation at runtime yet.
 
 ## Endpoint summary
 

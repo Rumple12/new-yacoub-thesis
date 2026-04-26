@@ -48,6 +48,10 @@ Temperature event
 
 Sensor events are represented in a shared JSON schema.
 
+Concrete schema file:
+
+- `shared_interfaces/json-schema/sensor-event.schema.json`
+
 ### Required fields
 
 - `sensor_id`
@@ -58,10 +62,14 @@ Sensor events are represented in a shared JSON schema.
 
 ### Sensor input example
 
+Concrete example file:
+
+- `shared_interfaces/examples/sensor-event.example.json`
+
 ```json
 {
   "sensor_id": "temp_sensor_1",
-  "timestamp": "2026-04-22T18:30:00Z",
+  "timestamp": "2026-04-25T20:00:00Z",
   "type": "temperature",
   "value": 31.4,
   "unit": "C"
@@ -80,6 +88,10 @@ Sensor events are represented in a shared JSON schema.
 
 Workflow decisions are represented in a shared JSON schema for actions.
 
+Concrete schema file:
+
+- `shared_interfaces/json-schema/agent-action.schema.json`
+
 ### Required fields
 
 - `action_id`
@@ -88,6 +100,10 @@ Workflow decisions are represented in a shared JSON schema for actions.
 - `requires_approval`
 
 ### Allowed action example
+
+Concrete example file:
+
+- `shared_interfaces/examples/fan-on.example.json`
 
 ```json
 {
@@ -118,11 +134,24 @@ All workflow-produced actions must be checked before middleware execution.
 
 ### Blocked case example
 
+Concrete example file:
+
+- `shared_interfaces/examples/blocked-action.example.json`
+
+The blocked example is intentionally **schema-invalid** and **policy-invalid**
+for Step 5 because:
+
+- `open_window` is outside the minimal allowed action set
+- `unknown_device` is outside the minimal allowed target set
+
+It is included as a future Step 8 safety-layer test case. Step 5 only defines
+the contract artifact; it does not implement safety logic.
+
 ```json
 {
   "action_id": "open_window",
   "target": "unknown_device",
-  "reason": "hallucinated_action",
+  "reason": "hallucinated_action_outside_first_scenario",
   "requires_approval": true
 }
 ```
@@ -141,6 +170,10 @@ The first implementation supports only a very small action set.
 
 - `fan_on`
 - `fan_off`
+
+### Initially allowed targets
+
+- `fan_1`
 
 ### Not allowed in the first implementation
 
@@ -174,6 +207,10 @@ This contract must stay aligned with:
 - `docs/architecture/`
 
 If communication behavior changes, this file must be updated.
+
+Step 5 defines these schema and example artifacts only. The Step 4 middleware
+does not yet enforce JSON Schema validation at runtime; runtime validation and
+safety behavior remain deferred to later steps.
 
 ## Scope note
 

@@ -100,6 +100,14 @@ Purpose:
 
 This is where Yacoub's runtime side and the minimum Obid-compatible layer meet.
 
+Current Step 5 contract artifacts:
+
+- `shared_interfaces/json-schema/sensor-event.schema.json`
+- `shared_interfaces/json-schema/agent-action.schema.json`
+- `shared_interfaces/examples/sensor-event.example.json`
+- `shared_interfaces/examples/fan-on.example.json`
+- `shared_interfaces/examples/blocked-action.example.json`
+
 ### `evaluation/`
 
 Contains the measurement and result material that will feed the thesis report.
@@ -134,9 +142,17 @@ Middleware <-> Shared Interfaces <-> Workflow / Safety logic
 
 Middleware creates or receives sensor events and represents them using a shared schema.
 
+Concrete input schema:
+
+- `shared_interfaces/json-schema/sensor-event.schema.json`
+
 ### Output side
 
 Workflow logic produces a proposed action using a shared schema.
+
+Concrete output schema:
+
+- `shared_interfaces/json-schema/agent-action.schema.json`
 
 ### Safety rule
 
