@@ -125,6 +125,19 @@ Concrete example file:
 
 All workflow-produced actions must be checked before middleware execution.
 
+Step 8 defines the minimum safety boundary in:
+
+- `safety_layer/policies/action-policy-v1.md`
+- `safety_layer/parsers/output-validation-v1.md`
+- `safety_layer/approvals/hitl-v1.md`
+- `safety_layer/examples/allowed-case.md`
+- `safety_layer/examples/blocked-case.md`
+- `safety_layer/examples/risky-approval-case.md`
+
+These files document the intended validation and approval behavior. They do not
+claim runtime enforcement unless later implementation and test evidence is
+added.
+
 ### Approval is required when
 
 - the action is not in the allowed action list

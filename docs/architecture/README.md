@@ -87,6 +87,15 @@ Purpose:
 - block malformed or unsafe actions
 - preserve one safe case and one blocked case for evaluation
 
+Current Step 8 safety artifacts:
+
+- `safety_layer/policies/action-policy-v1.md`
+- `safety_layer/parsers/output-validation-v1.md`
+- `safety_layer/approvals/hitl-v1.md`
+- `safety_layer/examples/allowed-case.md`
+- `safety_layer/examples/blocked-case.md`
+- `safety_layer/examples/risky-approval-case.md`
+
 ### `shared_interfaces/`
 
 This is the **contract boundary** between middleware and workflow/safety logic.
@@ -157,6 +166,10 @@ Concrete output schema:
 ### Safety rule
 
 No risky or malformed action may reach middleware execution without passing validation and, when needed, approval.
+
+Step 8 defines this as a minimum safety design and case documentation layer. It
+does not claim production-grade runtime enforcement unless later implementation
+and test evidence is added.
 
 ## Current communication model
 
