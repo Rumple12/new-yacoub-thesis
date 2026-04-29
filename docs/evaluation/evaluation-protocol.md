@@ -37,7 +37,7 @@ Temperature event
 
 ## Compared modes
 
-### Mode A — Deterministic baseline
+### Mode A - Deterministic baseline
 
 The deterministic baseline uses a fixed rule.
 
@@ -52,13 +52,36 @@ else:
 
 This mode is used as the comparison anchor.
 
-### Mode B — Agent-enhanced path
+Step 9 collection command:
+
+```powershell
+python scripts/collect_metrics.py --mode deterministic --webhook-url "<deterministic-test-webhook-url>" --runs 3
+```
+
+### Mode B - Agent-enhanced path
 
 The agent-enhanced path uses one minimal workflow/prompt setup to produce a structured action decision.
 
 The output must follow the shared action contract and pass validation before execution.
 
 This mode must stay minimal and must not expand into broad multi-agent architecture.
+
+Step 9 collection command:
+
+```powershell
+python scripts/collect_metrics.py --mode agent --webhook-url "<agent-test-webhook-url>" --runs 3
+```
+
+### Mode C - Safety cases
+
+Safety cases are based on the Step 8 safety design and case documentation.
+
+Step 9 can record the expected safety outcomes, but this does not prove runtime
+enforcement unless a later implementation adds and tests enforcement logic.
+
+```powershell
+python scripts/collect_metrics.py --mode safety --runs 1
+```
 
 ## Minimum test cases
 
@@ -71,6 +94,10 @@ The first evaluation must include at least these cases:
 | T3 | malformed sensor event | blocked or rejected |
 | T4 | malformed action output | blocked |
 | T5 | unsupported action | blocked or approval required |
+
+Concrete Step 9 cases are stored in:
+
+`evaluation/datasets/test-cases.json`
 
 ## Metrics to collect
 
@@ -88,6 +115,21 @@ For each run, collect:
 - RAM usage
 - thermal value or thermal collection status
 - notes/errors
+
+The raw CSV field definitions are documented in:
+
+`evaluation/metrics/metrics-schema.md`
+
+Latency is measured in `scripts/collect_metrics.py` with Python's
+`time.perf_counter()` around the webhook HTTP request.
+
+RAM and CPU are best-effort only. If Docker is available, the collector attempts
+`docker stats --no-stream` against the n8n container. If Docker stats are not
+available, resource fields are written as `not_available`.
+
+Thermal data is not faked. On Windows/PC it is written as `not_available` unless
+a local thermal source is available. Raspberry Pi thermal collection can be
+added later in Step 10, for example with `vcgencmd measure_temp`.
 
 ## Suggested result format
 
@@ -108,6 +150,10 @@ Suggested files:
 - `evaluation/results/processed/safety_outcomes.csv`
 - `evaluation/results/processed/baseline_vs_agent.csv`
 
+Raw files are produced by `scripts/collect_metrics.py`.
+
+Processed summaries are produced by `scripts/aggregate_results.py`.
+
 ## Minimum run count
 
 The first acceptable evaluation target is:
@@ -116,6 +162,10 @@ The first acceptable evaluation target is:
 - if time is limited, at least 3 runs per test case per mode
 
 The exact number of runs must be documented in the Results chapter.
+
+For quick smoke checks, one run per case is acceptable while verifying the
+harness. Reportable results should use the minimum run count above where time
+allows.
 
 ## Success criteria
 
@@ -128,14 +178,22 @@ The implementation is considered evaluation-ready when:
 - malformed or unsupported actions are blocked
 - the results can be summarized in report tables
 
+The Step 9 harness is considered ready when:
+
+- `collect_metrics.py --help` works
+- `aggregate_results.py --help` works
+- raw CSV files can be written to `evaluation/results/raw/`
+- processed summaries can be written to `evaluation/results/processed/`
+- missing resource or thermal data is recorded as `not_available`, not invented
+
 ## Relationship to report
 
 This protocol feeds:
 
-- Chapter 3 — Methodology
-- Chapter 5 — Measurement/Evaluation setup
-- Chapter 6 — Results
-- Chapter 7 — Discussion
+- Chapter 3 - Methodology
+- Chapter 5 - Measurement/Evaluation setup
+- Chapter 6 - Results
+- Chapter 7 - Discussion
 
 ## Scope note
 
@@ -148,5 +206,11 @@ It does not evaluate:
 - broad multi-agent systems
 - deep n8n internals
 - heavy observability stacks
+
+It also does not:
+
+- create fake result data
+- perform Raspberry Pi validation
+- claim runtime safety enforcement from Step 8 documentation alone
 
 The purpose is to support the narrowed new-yacoub thesis scope.

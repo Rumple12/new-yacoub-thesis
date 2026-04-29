@@ -94,13 +94,10 @@ What exists now:
 - narrowed implementation plan
 - ongoing scope and report-support notes
 - local n8n Docker baseline
-
-What does **not** exist yet:
-
 - middleware implementation
 - workflow exports
 - safety implementation
-- measurement scripts
+- lightweight evaluation harness
 - evaluation results
 
 ---
@@ -118,6 +115,22 @@ docker compose up -d
 ```
 
 Then open `http://localhost:5678`.
+
+---
+
+## Evaluation harness
+
+The Step 9 lightweight evaluation harness lives in `evaluation/` and `scripts/`.
+
+Useful entry points:
+
+```powershell
+python scripts/collect_metrics.py --help
+python scripts/aggregate_results.py --help
+```
+
+Raw run CSVs belong in `evaluation/results/raw/`; processed summaries belong in
+`evaluation/results/processed/`.
 
 ---
 
