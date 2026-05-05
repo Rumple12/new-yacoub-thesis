@@ -131,6 +131,25 @@ Thermal data is not faked. On Windows/PC it is written as `not_available` unless
 a local thermal source is available. Raspberry Pi thermal collection can be
 added later in Step 10, for example with `vcgencmd measure_temp`.
 
+## Optional Raspberry Pi Validation
+
+Raspberry Pi validation is optional Tier 1.5 evidence. It is separate from the
+primary PC/local evaluation.
+
+Pi validation may use:
+
+- the same temperature-to-fan scenario
+- a simplified middleware-only scenario if n8n/Docker is too heavy
+- limited CPU/RAM/thermal observations
+
+Pi evidence should be saved under:
+
+`evaluation/results/pi-validation/`
+
+Do not claim Pi deployment or Pi measurement results unless they were actually
+run on a Raspberry Pi. If Pi validation is not completed, the local PC results
+remain the thesis baseline.
+
 ## Suggested result format
 
 Raw results should be stored in:

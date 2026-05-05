@@ -381,6 +381,33 @@ middleware, workflows, or hardware complexity.
 
 
 
+## D-012 - Raspberry Pi validation is optional Tier 1.5 evidence
+
+**Decision:**
+
+Raspberry Pi validation remains optional Tier 1.5 evidence. The PC-first local
+system is the primary thesis baseline.
+
+**Reason:**
+
+The narrowed thesis must not be blocked by hardware availability or deployment
+complexity. Raspberry Pi validation is useful for edge-computing discussion, but
+the local system already carries the core implementation and evaluation path.
+
+**Impact:**
+
+- Pi validation must not redesign middleware or workflows.
+- Pi validation must not add multiple devices or a heavy observability stack.
+- If Pi validation cannot be completed, local PC results remain valid as the
+  main thesis evidence.
+- No Pi results may be invented.
+
+
+
+---
+
+
+
 ## Out-of-scope decisions currently locked
 
 

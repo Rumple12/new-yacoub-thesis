@@ -134,6 +134,19 @@ Raw run CSVs belong in `evaluation/results/raw/`; processed summaries belong in
 
 ---
 
+## Optional Raspberry Pi validation
+
+Step 10 Raspberry Pi validation is optional Tier 1.5 evidence. The local PC
+system remains the primary baseline.
+
+Notes and result location:
+
+- `infrastructure/os/raspberry-pi-notes.md`
+- `infrastructure/docker/pi-deployment-notes.md`
+- `evaluation/results/pi-validation/`
+
+---
+
 ## Repo structure
 
 ### High-priority implementation areas
