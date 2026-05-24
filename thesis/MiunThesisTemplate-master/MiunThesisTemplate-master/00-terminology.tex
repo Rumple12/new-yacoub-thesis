@@ -1,0 +1,26 @@
+\section*{\translate{Terminology}/\translate{Notation}}\label{sec:terminology}
+\phantomsection
+\addcontentsline{toc}{section}{Terminology / Notation}
+% What to write: alphabetical definitions of terms that recur across the thesis.
+% Main sources: README.md, docs/architecture/README.md, shared_interfaces/json-schema/*.json,
+% docs/decisions.md, evaluation/metrics/metrics-schema.md.
+% Missing checks: [CHECK VALUE: finalize terminology after Chapters 4-6 are drafted].
+
+\begin{table}[ht!]
+  \caption{Planned terminology entries to finalize during drafting.}
+  \label{tab:terminology-planned}
+  \begin{tabular}{@{}p{0.25\linewidth}p{0.65\linewidth}@{}}
+    \toprule
+    Term & Meaning to define in the final report \\
+    \midrule
+    API & [CHECK VALUE: define consistently with middleware implementation.] \\
+    CSV & [CHECK VALUE: define as the evaluation result format.] \\
+    GPIO & [CHECK VALUE: explain that real GPIO control was not implemented.] \\
+    HITL & [CHECK VALUE: define human-in-the-loop approval as a minimum design element.] \\
+    JSON contract & [CHECK VALUE: define using shared interface schemas.] \\
+    LLM & [CHECK VALUE: define only as used by the minimal agent-enhanced workflow.] \\
+    n8n & [CHECK VALUE: define as the self-hosted workflow automation engine.] \\
+    Tier 1.5 validation & [CHECK VALUE: define as Raspberry Pi middleware/action validation while n8n remains on PC.] \\
+    \bottomrule
+  \end{tabular}
+\end{table}

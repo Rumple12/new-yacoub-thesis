@@ -1,0 +1,68 @@
+\section{Theory and Related Work}\label{sec:theory}
+% Chapter purpose: give the reader enough theoretical background to understand the design and evaluation.
+% It should not broaden the thesis into a survey of multi-agent systems or model benchmarking.
+% Course/template source: Word template asks for theory, scientific base, background knowledge, and related work.
+% Missing checks: [CHECK VALUE: collect verified references before prose drafting].
+
+\subsection{Workflow Automation and Orchestration}\label{subsec:workflow-automation}
+% Discuss: workflow engines as coordination layers for event-action pipelines.
+% Source files: infrastructure/docker/README.md; docs/architecture/README.md.
+% Figures/tables: no figure required.
+% References needed: [REFERENCE NEEDED: workflow automation/orchestration source].
+% Missing checks: [CHECK VALUE: choose one or two strong sources, not a broad survey].
+
+\subsection{n8n as a Workflow Automation Platform}\label{subsec:n8n}
+% Discuss: n8n only as used here: self-hosted local workflow engine with webhook and HTTP request nodes.
+% Source files: infrastructure/docker/docker-compose.yml; docs/n8n-version.md; cognitive_logic/workflows/*.md.
+% Figures/tables: no figure required here; workflow figures belong in Chapter 5.
+% References needed: [REFERENCE NEEDED: n8n official documentation].
+% Missing checks: [CHECK VALUE: exact n8n version and relevant node documentation].
+
+\subsection{Middleware and API Boundary Design}\label{subsec:middleware-theory}
+% Discuss: middleware as the controlled bridge between workflow logic and action endpoints.
+% Source files: middleware/api/app.py; middleware/api/routes.py; middleware/webhooks/n8n_sender.py.
+% Figures/tables: no figure required.
+% References needed: [REFERENCE NEEDED: middleware/API design source].
+% Missing checks: [CHECK VALUE: decide whether a REST/API reference is necessary].
+
+\subsection{IoT-Style Event-Action Systems}\label{subsec:iot-event-action}
+% Discuss: sensor event ingestion, decision logic, and action execution as a general pattern.
+% Source files: shared_interfaces/json-schema/sensor-event.schema.json; evaluation/datasets/test-cases.json.
+% Figures/tables: no figure required.
+% References needed: [REFERENCE NEEDED: IoT event/action or edge computing source].
+% Missing checks: [CHECK VALUE: keep fan scenario framed as controlled proxy only].
+
+\subsection{JSON Contracts and Structured Action Formats}\label{subsec:json-contracts}
+% Discuss: why explicit schemas help keep workflow and middleware behavior reproducible.
+% Source files: shared_interfaces/json-schema/sensor-event.schema.json; shared_interfaces/json-schema/agent-action.schema.json; shared_interfaces/examples/*.json.
+% Figures/tables: optional table summarizing required action fields.
+% References needed: [REFERENCE NEEDED: JSON Schema documentation].
+% Missing checks: [CHECK VALUE: confirm whether runtime JSON Schema validation is implemented or only specified].
+
+\subsection{Deterministic and Minimal Agent-Enhanced Workflows}\label{subsec:deterministic-agent-theory}
+% Discuss: deterministic threshold rules versus a constrained LLM-assisted decision step.
+% Source files: cognitive_logic/workflows/deterministic-baseline.md; cognitive_logic/workflows/agent-minimal.md; cognitive_logic/prompts/system-prompt-v1.md; cognitive_logic/memory/memory-choice-v1.md.
+% Figures/tables: no figure required here; use Chapter 5 for workflow screenshots.
+% References needed: [REFERENCE NEEDED: LLM agent workflow or structured-output source].
+% Missing checks: [CHECK VALUE: avoid broad multi-agent or model-comparison framing].
+
+\subsection{Safety Validation and Human-in-the-Loop Concepts}\label{subsec:safety-hitl-theory}
+% Discuss: validation and approval as concepts, while making clear this thesis implements a minimum design and case set only.
+% Source files: safety_layer/policies/action-policy-v1.md; safety_layer/parsers/output-validation-v1.md; safety_layer/approvals/hitl-v1.md; safety_layer/examples/*.md.
+% Figures/tables: optional table with allowed, blocked, and risky case categories.
+% References needed: [REFERENCE NEEDED: safety validation or human-in-the-loop source].
+% Missing checks: [CHECK VALUE: do not claim production-grade enforcement].
+
+\subsection{Edge Computing and Raspberry Pi Validation Context}\label{subsec:edge-pi-theory}
+% Discuss: why a Raspberry Pi can be used as a limited validation target for middleware/action endpoints.
+% Source files: infrastructure/os/raspberry-pi-notes.md; infrastructure/docker/pi-deployment-notes.md; evaluation/results/pi-validation/README.md.
+% Figures/tables: no figure required.
+% References needed: [REFERENCE NEEDED: Raspberry Pi documentation], [REFERENCE NEEDED: edge computing source].
+% Missing checks: [CHECK VALUE: state that n8n stayed on the PC].
+
+\subsection{Related Work}\label{subsec:related-work}
+% Discuss: a small number of related works that connect workflow automation, IoT/edge systems, contract-based integration, and constrained agent workflows.
+% Source files: none in repository currently provide external related-work references.
+% Figures/tables: optional comparison table if sources are gathered.
+% References needed: [REFERENCE NEEDED: 2-4 related scientific works].
+% Missing checks: [CHECK VALUE: find verified sources; do not invent citations].

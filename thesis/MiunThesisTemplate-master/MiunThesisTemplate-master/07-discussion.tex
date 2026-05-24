@@ -1,0 +1,77 @@
+\section{Discussion}\label{sec:discussion}
+% Chapter purpose: interpret results as an argument, answer RQ1-RQ3, and state limitations early.
+% Source files: Chapter 6 results; docs/report-notes/final-evidence-inventory.md; docs/decisions.md.
+% Missing checks: [CHECK VALUE: update after final Chapter 6 tables].
+
+\subsection{Limitations of the Evidence}\label{subsec:discussion-limitations}
+% Discuss first: small run count, simulated fan action, no real GPIO, no full n8n-on-Pi deployment, limited safety enforcement, and local thermal limitations.
+% Source files: docs/report-notes/final-evidence-inventory.md; docs/report-notes/step-09-measurement-evaluation-harness.md; docs/report-notes/step-10-raspberry-pi-validation.md.
+% Figures/tables: optional limitation table.
+% References needed: none.
+% Missing checks: [CHECK VALUE: ensure limitations are consistent with Results].
+
+\subsection{Answer to RQ1}\label{subsec:discussion-rq1}
+% Discuss: deterministic workflow accuracy and consistency across defined temperature test cases.
+% Source files: evaluation/results/processed/baseline_vs_agent.csv; cognitive_logic/workflows/evidence/step-06-runtime-verification.md.
+% Figures/tables: refer to action-correctness table in Chapter 6.
+% References needed: none.
+% Missing checks: [CHECK VALUE: final deterministic success counts].
+
+\subsection{Answer to RQ2}\label{subsec:discussion-rq2}
+% Discuss: agent-enhanced workflow correctness, contract-validity, and comparison with deterministic baseline.
+% Source files: evaluation/results/processed/baseline_vs_agent.csv; shared_interfaces/json-schema/agent-action.schema.json; cognitive_logic/workflows/evidence/step-07/step-07-runtime-verification.md.
+% Figures/tables: refer to baseline-vs-agent and contract-validity tables in Chapter 6.
+% References needed: [REFERENCE NEEDED: structured output or agent workflow source if used].
+% Missing checks: [CHECK VALUE: final contract-validity evidence].
+
+\subsection{Answer to RQ3}\label{subsec:discussion-rq3}
+% Discuss: local latency/resource observations and Raspberry Pi Tier 1.5 behavior.
+% Source files: evaluation/results/processed/summary_latency.csv; evaluation/results/processed/summary_resources.csv; evaluation/results/pi-validation/pi-workflow-run-final.csv; evaluation/results/pi-validation/pi-validation-notes.md.
+% Figures/tables: refer to latency/resource/Pi tables in Chapter 6.
+% References needed: [REFERENCE NEEDED: edge computing source if used].
+% Missing checks: [CHECK VALUE: final latency/resource values].
+
+\subsection{Deterministic Baseline Versus Minimal Agent-Enhanced Path}\label{subsec:discussion-baseline-vs-agent}
+% Discuss: what the agent adds and what it does not add.
+% Keep narrow: structured decision output and contract-bound routing, not broad autonomy or multi-agent reasoning.
+% Source files: cognitive_logic/workflows/deterministic-baseline.md; cognitive_logic/workflows/agent-minimal.md; cognitive_logic/prompts/system-prompt-v1.md; cognitive_logic/memory/memory-choice-v1.md.
+% Figures/tables: refer to workflow figures and comparison table.
+% References needed: [REFERENCE NEEDED: LLM workflow or structured-output source if cited].
+% Missing checks: [CHECK VALUE: avoid overclaiming intelligence or generalization].
+
+\subsection{Contract and Safety Limitations}\label{subsec:discussion-contract-safety}
+% Discuss: contract boundary value, minimum validation design, and the lack of production-grade runtime enforcement.
+% Source files: shared_interfaces/json-schema/*.json; safety_layer/*; docs/decisions.md D-009 and D-010.
+% Figures/tables: optional safety-case table.
+% References needed: [REFERENCE NEEDED: safety validation or human-in-the-loop source].
+% Missing checks: [CHECK VALUE: no separate safety RQ; evaluate safety/contract under RQ2].
+
+\subsection{Why This Is Tier 1.5 Rather Than Full Edge Deployment}\label{subsec:discussion-tier-15}
+% Discuss: n8n stayed on PC; only middleware/action endpoint moved to Raspberry Pi.
+% Source files: evaluation/results/pi-validation/README.md; infrastructure/docker/pi-deployment-notes.md; docs/decisions.md D-003 and D-012.
+% Figures/tables: refer to Pi validation figure/table.
+% References needed: [REFERENCE NEEDED: Raspberry Pi documentation], [REFERENCE NEEDED: edge computing source].
+% Missing checks: [CHECK VALUE: do not imply full n8n-on-Pi benchmarking].
+
+\subsection{Broader Use-Case Relevance}\label{subsec:discussion-broader-use-cases}
+% Discuss carefully: the fan scenario as a controlled proxy for event-validation-action pipelines.
+% Mention possible extension contexts only as future relevance: smart building control, industrial monitoring, environmental sensing, and health/environment monitoring.
+% Source files: docs/architecture/README.md; docs/decisions.md; final architecture figure.
+% Figures/tables: no new figure required.
+% References needed: [REFERENCE NEEDED: smart building or industrial IoT source if making broader contextual claims].
+% Missing checks: [CHECK VALUE: do not claim these broader contexts were implemented].
+
+\subsection{Threats to Validity}\label{subsec:discussion-threats-validity}
+% Discuss: internal, construct, external, and conclusion validity threats if useful.
+% Source files: evaluation/README.md; evaluation/results/step-09-small-measurement-notes.md; docs/report-notes/final-evidence-inventory.md.
+% Figures/tables: optional threats-to-validity table.
+% References needed: [REFERENCE NEEDED: methodology/validity source if used].
+% Missing checks: [CHECK VALUE: final validity categories].
+
+\subsection{Ethical and Societal Discussion}\label{subsec:ethical-societal}
+% Discuss: AI-assisted action selection, human responsibility, safety boundaries, and implications for IoT automation.
+% Course source: DT099G PDF requires reflection on societal and ethical aspects.
+% Source files: safety_layer/; docs/decisions.md; Chapter 1 AI tools section.
+% Figures/tables: no figure required.
+% References needed: [REFERENCE NEEDED: AI/automation safety or human oversight source if used].
+% Missing checks: [CHECK VALUE: university/course-specific ethics expectations if any].

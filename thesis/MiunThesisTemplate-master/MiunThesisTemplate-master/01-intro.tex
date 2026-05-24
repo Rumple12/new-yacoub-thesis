@@ -1,0 +1,88 @@
+\section{Introduction}\label{sec:intro}
+% Chapter purpose: frame the thesis as a narrow, measurable proof-of-concept rather than a project diary.
+% Course/template source: docs/course/DT099G information 2026-1 (1) (1).pdf and docs/templates/Miun ThesisTemplate 2026-01-21 (1).docx.
+% Project source: docs/plans/implementation-plan.md, docs/ongoing/yacoub-scope.md, docs/decisions.md, README.md.
+% Missing checks: [CHECK VALUE: final title, author metadata, supervisor name, examiner name].
+
+\subsection{Background and Motivation}\label{subsec:background}
+% Discuss: workflow automation, IoT-style event-action systems, and why a small controlled fan scenario is a useful proxy.
+% Source files: README.md; docs/architecture/README.md; docs/report-notes/step-01-lock-scope.md.
+% Figures/tables: no main figure required here; optionally refer forward to Figure~\ref{fig:final-architecture}.
+% References needed: [REFERENCE NEEDED: IoT/edge computing source], [REFERENCE NEEDED: workflow automation/orchestration source], [REFERENCE NEEDED: n8n documentation].
+% Missing checks: [CHECK VALUE: exact non-technical motivation and problem framing].
+
+\subsection{Problem Statement}\label{subsec:problem-statement}
+% Discuss: the investigated problem as a measurable integration/evaluation problem.
+% Keep it narrow: PC-hosted Docker n8n, Python middleware, shared JSON contracts, simulated fan actions, CSV-based evaluation, and Tier 1.5 Raspberry Pi validation.
+% Source files: docs/plans/implementation-plan.md; docs/decisions.md decisions D-001 through D-013; docs/report-notes/step-11-implementation-freeze.md.
+% Figures/tables: no figure required.
+% References needed: none beyond Chapter 2 theory references.
+% Missing checks: [CHECK VALUE: final one-sentence problem statement].
+
+\subsection{Aim}\label{subsec:aim}
+% Discuss: aim of building and evaluating one complete vertical slice.
+% Source files: docs/plans/implementation-plan.md; docs/ongoing/yacoub-scope.md; README.md.
+% Figures/tables: no figure required.
+% References needed: none.
+% Missing checks: [CHECK VALUE: final aim statement aligned with RQ1-RQ3].
+
+\subsection{Research Questions}\label{subsec:research-questions}
+% Discuss: three measurable research questions only.
+% Source files: user-approved updated research questions; docs/ongoing/research-questions.md may be historical and must be checked against this approved set.
+% Figures/tables: no figure required.
+% References needed: none.
+% Missing checks: [CHECK VALUE: ensure the wording below remains the final supervisor-approved wording].
+
+\begin{enumerate}
+  \item \textbf{RQ1:} How accurately and consistently does the deterministic n8n workflow produce the expected fan action across the defined temperature test cases?
+  \item \textbf{RQ2:} How accurately and consistently does the minimal agent-enhanced workflow produce contract-valid action output compared with the deterministic baseline?
+  \item \textbf{RQ3:} What latency, resource, and deployment behavior is observed during local execution and Raspberry Pi Tier 1.5 middleware validation?
+\end{enumerate}
+
+\subsection{Scope and Limitations}\label{subsec:scope-limitations}
+% Discuss: what is included and excluded at the start, before making claims.
+% Must include: one scenario, simulated fan actions, PC-hosted n8n, middleware bridge, deterministic baseline, minimal agent-enhanced path, shared JSON contracts, minimum safety design, CSV evaluation, Tier 1.5 Pi validation.
+% Must exclude: full n8n-on-Pi deployment, real GPIO hardware, production-grade safety enforcement, multi-agent architecture, large benchmarking, multiple devices/models, heavy observability stacks.
+% Source files: docs/ongoing/yacoub-scope.md; docs/decisions.md; docs/report-notes/final-evidence-inventory.md.
+% Figures/tables: optional scope table if the chapter needs clarity.
+% References needed: none.
+% Missing checks: [CHECK VALUE: confirm no later chapter overclaims beyond the frozen implementation].
+
+\subsection{Contributions}\label{subsec:contributions}
+% Discuss: concise technical contribution and author/supervisor roles.
+% Use a CRediT-style list later:
+% Conceptualization: author, with supervisor feedback.
+% Methodology: author, with supervisor feedback.
+% Software: author.
+% Validation: author.
+% Investigation: author.
+% Data curation: author.
+% Writing - original draft: author.
+% Writing - review and editing: author, with supervisor feedback.
+% Supervision: supervisor.
+% Source files: docs/report-notes/step-11-implementation-freeze.md; docs/report-notes/final-evidence-inventory.md.
+% Figures/tables: no figure required.
+% References needed: none.
+% Missing checks: [CHECK VALUE: supervisor name and final contribution wording].
+
+\subsection{Usage of AI Tools in This Thesis}\label{subsec:ai-tools}
+% Discuss: how AI tools supported planning, review, repair, report scaffolding, or text drafting, if applicable.
+% Course/template source: docs/templates/Miun ThesisTemplate 2026-01-21 (1).docx requires this section in Chapter 1.
+% Source files: AGENTS.md; .agents/ if relevant; this LaTeX skeleton creation; final author workflow notes.
+% Figures/tables: no figure required.
+% References needed: [REFERENCE NEEDED: course or university AI-use policy if required].
+% Missing checks: [CHECK VALUE: exact AI tools used and final author responsibility statement].
+
+\subsection{Division of Work / Author Contribution}\label{subsec:division-work}
+% Discuss: which parts were performed by the author and what came from supervisor feedback.
+% Source files: docs/report-notes/*.md; final evidence inventory; supervisor feedback in thesis-writing task.
+% Figures/tables: no figure required.
+% References needed: none.
+% Missing checks: [CHECK VALUE: confirm whether this is a single-author thesis and whether external help must be named].
+
+\subsection{Report Outline}\label{subsec:outline}
+% Discuss: short chapter-by-chapter outline beginning with Chapter 2, per the MIUN template.
+% Source files: this LaTeX skeleton and thesis/report-writing-map.md.
+% Figures/tables: no figure required.
+% References needed: none.
+% Missing checks: [CHECK VALUE: update after final chapter titles are locked].
