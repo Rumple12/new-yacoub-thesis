@@ -45,8 +45,20 @@ The Step 7 runtime evidence records:
 - middleware reachable from Dockerized n8n through `http://host.docker.internal:8000`
 - model used: Google Gemini Chat Model
 - memory strategy: stateless / no memory
+- screenshot evidence of the minimal LLM decision node with Google Gemini Chat Model connected
+- screenshot evidence of the prompt/system-message setup used by the decision node
+- screenshot evidence of structured JSON output from the agent path
+- screenshot evidence of stateless/no-memory canvas setup, with no memory node connected
 - high-temperature input `31.4 C` producing `fan_on`, routing to `POST /fan/on`, and receiving a simulated middleware response with `status = ok`, `action = fan_on`, and `fan = on`
 - low-temperature input `24.5 C` producing `fan_off`, routing to `POST /fan/off`, and receiving a simulated middleware response with `status = ok`, `action = fan_off`, and `fan = off`
+
+The Step 7 screenshots therefore cover:
+
+- model setup
+- prompt/system-message setup
+- structured JSON output
+- no-memory/stateless canvas setup
+- `fan_on` and `fan_off` middleware routing
 
 ## Report chapters it feeds
 
@@ -71,8 +83,6 @@ The Step 7 runtime evidence records:
 ## Screenshots/logs still needed
 
 - Final exported n8n workflow after any UI import/re-export changes.
-- Screenshot or saved evidence of the AI node prompt/model configuration.
-- Screenshot or saved evidence showing no memory node is connected.
 - Repeated-run logs for the same test cases once the Step 9 measurement harness exists.
 - Latency, RAM, CPU, and thermal/resource measurements from Step 9.
 - Baseline-vs-agent comparison tables after Step 9.

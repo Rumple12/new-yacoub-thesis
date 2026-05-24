@@ -1,0 +1,47 @@
+# Final Architecture Report Figure
+
+```mermaid
+flowchart TD
+  A["Temperature event / test input<br/>31.4 C or 24.5 C"] --> B["PC-hosted Docker n8n<br/>n8n stays on PC"]
+
+  B --> C["Workflow decision"]
+  C --> D1["Deterministic baseline<br/>threshold rule"]
+  C --> D2["Minimal agent-enhanced workflow<br/>structured JSON output"]
+
+  D1 --> E["Shared JSON contract<br/>sensor/action schemas"]
+  D2 --> E
+
+  E --> F["Minimum safety / validation design<br/>allowed, blocked, risky cases"]
+  F --> G["Python middleware API"]
+
+  G --> H1["POST /fan/on<br/>simulated action"]
+  G --> H2["POST /fan/off<br/>simulated action"]
+
+  H1 --> I["Evaluation harness + CSV results<br/>collect_metrics.py / aggregate_results.py"]
+  H2 --> I
+
+  B -. "HTTP over network" .-> P["Raspberry Pi Tier 1.5 validation<br/>Python middleware/action endpoint only"]
+  P --> Q["Pi evidence<br/>latency, CPU/RAM, temperature"]
+
+  P -.-> R["Scope limits<br/>no full n8n-on-Pi deployment<br/>no real GPIO hardware<br/>fan action remains simulated<br/>no production safety enforcement"]
+
+  classDef runtime fill:#eef6ff,stroke:#3b6ea8,color:#111827;
+  classDef workflow fill:#f7f7f7,stroke:#666,color:#111827;
+  classDef contract fill:#f1f8e9,stroke:#5b8c3a,color:#111827;
+  classDef safety fill:#fff4e5,stroke:#b7791f,color:#111827;
+  classDef action fill:#fff1f2,stroke:#be123c,color:#111827;
+  classDef evidence fill:#f8fafc,stroke:#475569,color:#111827;
+
+  class B,G,P runtime;
+  class C,D1,D2 workflow;
+  class E contract;
+  class F safety;
+  class H1,H2,R action;
+  class I,Q evidence;
+```
+
+**Caption:** Simplified report figure showing the frozen Tier 1.5 thesis architecture: PC-hosted Docker n8n, two workflow decision paths, shared JSON contracts, minimum validation, simulated middleware fan actions, CSV evaluation, and Raspberry Pi middleware-only validation.
+
+This is the simplified report figure intended for use in the thesis PDF. It preserves the frozen architecture while reducing implementation detail so the figure remains readable on a page.
+
+The detailed diagram remains available as internal architecture documentation in `docs/architecture/final-architecture.md` and `docs/architecture/final-architecture.mmd`.

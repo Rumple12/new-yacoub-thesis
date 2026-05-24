@@ -28,6 +28,7 @@ The evidence supports the thesis discussion around constrained hardware and depl
 - `infrastructure/docker/pi-deployment-notes.md`
 - `evaluation/results/pi-validation/README.md`
 - `evaluation/results/pi-validation/pi-validation-notes.md`
+- `evaluation/results/pi-validation/pi-startup-ip-transcript.md`
 - `evaluation/results/pi-validation/pi-run-01.csv`
 - `evaluation/results/pi-validation/pi-workflow-run-final.csv`
 - `evaluation/results/pi-validation/2. Measure direct Pi middleware latency.png`
@@ -62,6 +63,15 @@ CPU/RAM/thermal evidence from `pi-validation-notes.md`:
 - thermal command: `vcgencmd measure_temp`
 - observed thermal value: `49.6 C`
 
+Startup/IP evidence from `pi-startup-ip-transcript.md`:
+
+- observed Raspberry Pi IP: `10.131.76.89`
+- middleware startup command: `MIDDLEWARE_HOST=0.0.0.0 python3 -m middleware.api.app`
+- middleware base URL: `http://10.131.76.89:8000`
+- n8n HTTP node action URLs:
+  - `http://10.131.76.89:8000/fan/on`
+  - `http://10.131.76.89:8000/fan/off`
+
 ## Report chapters it feeds
 
 - Chapter 4 - Choice of approach: PC-first development with Raspberry Pi as later Tier 1.5 validation.
@@ -78,14 +88,14 @@ CPU/RAM/thermal evidence from `pi-validation-notes.md`:
 - The middleware action remained simulated; no real GPIO or physical fan was controlled.
 - The full workflow latency values come from `pi-workflow-run-final.csv`.
 - Direct endpoint latency is supporting evidence only and should not be treated as full workflow latency.
-- `pi-run-01.csv` includes `thermal_c=not_available` in the Step 9-style row; Pi thermal evidence is separately documented in `pi-validation-notes.md`.
+- `pi-workflow-run-final.csv` preserves the workflow-run collection fields where `thermal_c` is `not_available`; `pi-run-01.csv` records the supporting Pi thermal value `49.6 C`.
 - The run count is limited and should be interpreted as validation evidence, not broad benchmarking.
 - This step does not expand into Tier 2 deployment work.
 - Step 11 freeze work was not started here.
 
-## Screenshots/logs still needed
+## Evidence cleanup status
 
-- Clear terminal transcript showing the Raspberry Pi middleware startup command and IP/network setup.
+- The Raspberry Pi startup/IP transcript gap is closed by `evaluation/results/pi-validation/pi-startup-ip-transcript.md`.
 - Optional repeated Pi runs if stronger final report tables are needed.
 - A concise screenshot set selected for the thesis appendix, avoiding template and failed setup files.
 - Any future evidence would need to stay within Tier 1.5 unless the scope is explicitly changed.

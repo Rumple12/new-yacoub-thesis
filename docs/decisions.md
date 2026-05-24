@@ -408,6 +408,48 @@ the local system already carries the core implementation and evaluation path.
 
 
 
+## D-013 - implementation is frozen for report writing
+
+**Decision:**
+
+As of Step 11, the current narrowed Tier 1.5 implementation is frozen.
+
+The frozen state includes:
+
+- local PC-hosted n8n using Docker Compose
+- Python middleware exposing `/status`, `/sensor-event`, `/fan/on`, and
+  `/fan/off`
+- deterministic baseline workflow
+- minimal agent-enhanced workflow
+- shared JSON contracts for sensor and action messages
+- minimum safety/validation design with allowed, blocked, and risky cases
+- lightweight evaluation harness with CSV outputs
+- Raspberry Pi Tier 1.5 validation where n8n stayed on the PC and the
+  middleware/action endpoint ran on Raspberry Pi
+
+**Reason:**
+
+The implementation has enough evidence to support report writing, analysis,
+figures, tables, limitations, and discussion. Step 10 produced real Raspberry Pi
+validation without expanding beyond the narrowed scope. Adding more features now
+would risk reducing report quality before the deadline.
+
+**Impact:**
+
+- Further work should focus on report writing, analysis, figure/table cleanup,
+  and narrow bug fixes only.
+- No new architecture, workflows, devices, MCP integration, real GPIO, or agent
+  features should be added unless explicitly required by the supervisor or
+  examiner.
+- Documentation fixes are allowed when they correct broken references, typos,
+  filename mismatches, or clear inconsistencies in the frozen evidence.
+
+
+
+---
+
+
+
 ## Out-of-scope decisions currently locked
 
 
