@@ -9,6 +9,15 @@
 \usepackage{float}
 \usepackage{newfloat}
 \usepackage[]{appendix}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{ragged2e}
+\usepackage{xurl}
+\usepackage{seqsplit}
+
+\newcommand{\codepath}[1]{\texttt{\seqsplit{#1}}}
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
 
 \graphicspath{{Figures/}}
 \addbibresource{literature.bib}

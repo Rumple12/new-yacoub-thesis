@@ -1,0 +1,10 @@
+\babel@toc {english}{}\relax 
+\contentsline {table}{\numberline {1}{\ignorespaces Planned terminology entries to finalize during drafting.}}{xi}{table.1}%
+\contentsline {table}{\numberline {2}{\ignorespaces Defined workflow test cases from \texttt {evaluation/datasets/test-cases.json}.}}{10}{table.2}%
+\contentsline {table}{\numberline {3}{\ignorespaces Deterministic baseline results from \codepath {evaluation/results/raw/run\_20260429T165733Z\_deterministic.csv}.}}{30}{table.3}%
+\contentsline {table}{\numberline {4}{\ignorespaces Minimal agent-enhanced workflow results from \codepath {evaluation/results/raw/run\_20260429T165859Z\_agent.csv}.}}{31}{table.4}%
+\contentsline {table}{\numberline {5}{\ignorespaces Documented safety and validation cases from Step 8.}}{32}{table.5}%
+\contentsline {table}{\numberline {6}{\ignorespaces Evaluation harness output files.}}{33}{table.6}%
+\contentsline {table}{\numberline {7}{\ignorespaces Final workflow latency summary.}}{34}{table.7}%
+\contentsline {table}{\numberline {8}{\ignorespaces Raspberry Pi Tier 1.5 full-workflow validation from \codepath {pi-workflow-run-final.csv}.}}{35}{table.8}%
+\contentsline {table}{\numberline {9}{\ignorespaces Supporting Raspberry Pi middleware observations.}}{35}{table.9}%
