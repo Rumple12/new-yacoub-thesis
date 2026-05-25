@@ -84,21 +84,20 @@ The following are out of scope unless the primary thesis is already complete:
 
 ## Current status
 
-The repository is currently in the **planning + scaffold phase**.
+The repository is in the **Step 11 implementation-freeze phase**.
 
-What exists now:
+Frozen Tier 1.5 implementation state:
 
-- repo structure
-- thesis planning documents
-- Antigravity workspace rules/workflows/skill
-- narrowed implementation plan
-- ongoing scope and report-support notes
 - local n8n Docker baseline
-- middleware implementation
-- workflow exports
-- safety implementation
-- lightweight evaluation harness
-- evaluation results
+- Python middleware implementation
+- deterministic baseline workflow
+- minimal agent-enhanced workflow
+- shared JSON contract files
+- minimum safety/validation design
+- lightweight evaluation harness and CSV outputs
+- Raspberry Pi validation where n8n stayed on the PC and the middleware/action endpoint ran on Raspberry Pi
+
+Further work should focus on report writing, analysis, figure/table cleanup, and narrow bug fixes only.
 
 ---
 

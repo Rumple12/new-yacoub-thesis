@@ -1,77 +1,85 @@
 \section{Discussion}\label{sec:discussion}
-% Chapter purpose: interpret results as an argument, answer RQ1-RQ3, and state limitations early.
-% Source files: Chapter 6 results; docs/report-notes/final-evidence-inventory.md; docs/decisions.md.
-% Missing checks: [CHECK VALUE: update after final Chapter 6 tables].
 
-\subsection{Limitations of the Evidence}\label{subsec:discussion-limitations}
-% Discuss first: small run count, simulated fan action, no real GPIO, no full n8n-on-Pi deployment, limited safety enforcement, and local thermal limitations.
-% Source files: docs/report-notes/final-evidence-inventory.md; docs/report-notes/step-09-measurement-evaluation-harness.md; docs/report-notes/step-10-raspberry-pi-validation.md.
-% Figures/tables: optional limitation table.
-% References needed: none.
-% Missing checks: [CHECK VALUE: ensure limitations are consistent with Results].
+This chapter interprets the results from Chapter~\ref{sec:results} in relation to the research questions and the design choices described in Chapters~\ref{sec:methodology}--\ref{sec:implementation}. The discussion is intentionally bounded by the defined proof-of-concept scope. The thesis evaluates a small workflow-to-action architecture, not a production IoT platform, a full Raspberry Pi deployment, or a broad agent system.
 
-\subsection{Answer to RQ1}\label{subsec:discussion-rq1}
-% Discuss: deterministic workflow accuracy and consistency across defined temperature test cases.
-% Source files: evaluation/results/processed/baseline_vs_agent.csv; cognitive_logic/workflows/evidence/step-06-runtime-verification.md.
-% Figures/tables: refer to action-correctness table in Chapter 6.
-% References needed: none.
-% Missing checks: [CHECK VALUE: final deterministic success counts].
+\subsection{Limitations of the Current Implementation}\label{subsec:discussion-limitations-current}
 
-\subsection{Answer to RQ2}\label{subsec:discussion-rq2}
-% Discuss: agent-enhanced workflow correctness, contract-validity, and comparison with deterministic baseline.
-% Source files: evaluation/results/processed/baseline_vs_agent.csv; shared_interfaces/json-schema/agent-action.schema.json; cognitive_logic/workflows/evidence/step-07/step-07-runtime-verification.md.
-% Figures/tables: refer to baseline-vs-agent and contract-validity tables in Chapter 6.
-% References needed: [REFERENCE NEEDED: structured output or agent workflow source if used].
-% Missing checks: [CHECK VALUE: final contract-validity evidence].
+The most important limitation is the scale of the evaluation. The system was evaluated with a small number of defined temperature cases and a small final run count. The high-temperature case used \texttt{31.4 C} and the low-temperature case used \texttt{24.5 C}. These cases are sufficient for checking whether the implemented threshold logic, agent output path, and middleware routing behave correctly for the thesis scenario, but they are not sufficient for statistical claims about reliability across many inputs, environments, or repeated deployments.
 
-\subsection{Answer to RQ3}\label{subsec:discussion-rq3}
-% Discuss: local latency/resource observations and Raspberry Pi Tier 1.5 behavior.
-% Source files: evaluation/results/processed/summary_latency.csv; evaluation/results/processed/summary_resources.csv; evaluation/results/pi-validation/pi-workflow-run-final.csv; evaluation/results/pi-validation/pi-validation-notes.md.
-% Figures/tables: refer to latency/resource/Pi tables in Chapter 6.
-% References needed: [REFERENCE NEEDED: edge computing source if used].
-% Missing checks: [CHECK VALUE: final latency/resource values].
+The fan action was simulated in middleware. No real GPIO sensor, physical fan, relay, or actuator was controlled. This means that the results describe workflow behavior, contract-shaped action output, middleware routing, latency measurement, and split deployment behavior. They do not describe electrical reliability, physical actuation, sensor calibration, or hardware safety. This limitation is central to the interpretation of the thesis: the contribution is the measured event-to-action pipeline, not a completed physical control system.
 
-\subsection{Deterministic Baseline Versus Minimal Agent-Enhanced Path}\label{subsec:discussion-baseline-vs-agent}
-% Discuss: what the agent adds and what it does not add.
-% Keep narrow: structured decision output and contract-bound routing, not broad autonomy or multi-agent reasoning.
-% Source files: cognitive_logic/workflows/deterministic-baseline.md; cognitive_logic/workflows/agent-minimal.md; cognitive_logic/prompts/system-prompt-v1.md; cognitive_logic/memory/memory-choice-v1.md.
-% Figures/tables: refer to workflow figures and comparison table.
-% References needed: [REFERENCE NEEDED: LLM workflow or structured-output source if cited].
-% Missing checks: [CHECK VALUE: avoid overclaiming intelligence or generalization].
+The Raspberry Pi validation is also limited. n8n was not deployed on the Raspberry Pi. Instead, n8n stayed on the PC and the Raspberry Pi ran only the Python middleware/action endpoint. The Pi evidence therefore shows that the PC-hosted workflow could call a Pi-hosted endpoint over the network for the defined cases. It does not show full n8n-on-Pi performance, whole-system edge deployment, or Raspberry Pi optimization.
 
-\subsection{Contract and Safety Limitations}\label{subsec:discussion-contract-safety}
-% Discuss: contract boundary value, minimum validation design, and the lack of production-grade runtime enforcement.
-% Source files: shared_interfaces/json-schema/*.json; safety_layer/*; docs/decisions.md D-009 and D-010.
-% Figures/tables: optional safety-case table.
-% References needed: [REFERENCE NEEDED: safety validation or human-in-the-loop source].
-% Missing checks: [CHECK VALUE: no separate safety RQ; evaluate safety/contract under RQ2].
+The safety layer must be interpreted with the same care. The repository contains a documented validation design with allowed, blocked, and risky cases, but it does not prove production-grade runtime enforcement. The processed \texttt{safety\_outcomes.csv} file currently contains only headers, so the safety material is design and specification evidence rather than a measured safety framework. This is still valuable for the thesis because it defines the boundary that workflow and agent output should satisfy, but it should not be described as operational safety assurance.
 
-\subsection{Why This Is Tier 1.5 Rather Than Full Edge Deployment}\label{subsec:discussion-tier-15}
-% Discuss: n8n stayed on PC; only middleware/action endpoint moved to Raspberry Pi.
-% Source files: evaluation/results/pi-validation/README.md; infrastructure/docker/pi-deployment-notes.md; docs/decisions.md D-003 and D-012.
-% Figures/tables: refer to Pi validation figure/table.
-% References needed: [REFERENCE NEEDED: Raspberry Pi documentation], [REFERENCE NEEDED: edge computing source].
-% Missing checks: [CHECK VALUE: do not imply full n8n-on-Pi benchmarking].
+Finally, the agent-enhanced workflow is deliberately minimal. It uses one prompt setup, one configured model path, and stateless execution. It is not a broad multi-agent architecture, not a model benchmark, and not an autonomous planning system. The result should therefore be read as evidence about contract-shaped action output in one small workflow scenario, not as evidence about general LLM agent reliability.
 
-\subsection{Broader Use-Case Relevance}\label{subsec:discussion-broader-use-cases}
-% Discuss carefully: the fan scenario as a controlled proxy for event-validation-action pipelines.
-% Mention possible extension contexts only as future relevance: smart building control, industrial monitoring, environmental sensing, and health/environment monitoring.
-% Source files: docs/architecture/README.md; docs/decisions.md; final architecture figure.
-% Figures/tables: no new figure required.
-% References needed: [REFERENCE NEEDED: smart building or industrial IoT source if making broader contextual claims].
-% Missing checks: [CHECK VALUE: do not claim these broader contexts were implemented].
+\subsection{Discussion of RQ1: Deterministic Workflow Accuracy and Consistency}\label{subsec:discussion-rq1-deterministic}
 
-\subsection{Threats to Validity}\label{subsec:discussion-threats-validity}
-% Discuss: internal, construct, external, and conclusion validity threats if useful.
-% Source files: evaluation/README.md; evaluation/results/step-09-small-measurement-notes.md; docs/report-notes/final-evidence-inventory.md.
-% Figures/tables: optional threats-to-validity table.
-% References needed: [REFERENCE NEEDED: methodology/validity source if used].
-% Missing checks: [CHECK VALUE: final validity categories].
+RQ1 asks how accurately and consistently the deterministic n8n workflow produces the expected fan action across the defined temperature test cases. The deterministic baseline behaved as expected for the final high- and low-temperature cases reported in Table~\ref{tab:deterministic-results}. The high-temperature input was routed to \texttt{fan\_on}, and the low-temperature input was routed to \texttt{fan\_off}. This supports the conclusion that the deterministic workflow is correct for the defined cases.
 
-\subsection{Ethical and Societal Discussion}\label{subsec:ethical-societal}
-% Discuss: AI-assisted action selection, human responsibility, safety boundaries, and implications for IoT automation.
-% Course source: DT099G PDF requires reflection on societal and ethical aspects.
-% Source files: safety_layer/; docs/decisions.md; Chapter 1 AI tools section.
-% Figures/tables: no figure required.
-% References needed: [REFERENCE NEEDED: AI/automation safety or human oversight source if used].
-% Missing checks: [CHECK VALUE: university/course-specific ethics expectations if any].
+The result is unsurprising but important. A deterministic threshold workflow is transparent: the rule is visible, the threshold is fixed, and the route from input value to action endpoint can be inspected. This makes the deterministic path useful as the baseline for the rest of the thesis. It verifies that the middleware endpoints, webhook path, and simulated fan responses can support the temperature-to-fan scenario before introducing an LLM decision step.
+
+At the same time, the result should not be generalized beyond the tested cases. The evaluation does not include boundary testing around exactly \texttt{30.0 C}, noisy input streams, malformed temperature events, long-duration operation, or concurrent workflow executions. The deterministic evidence therefore answers RQ1 only within the defined proof-of-concept scenario. Within that scenario, the workflow produced the expected actions; outside it, further testing would be required.
+
+\subsection{Discussion of RQ2: Agent-Enhanced Contract-Valid Output}\label{subsec:discussion-rq2-agent}
+
+RQ2 asks how accurately and consistently the minimal agent-enhanced workflow produces contract-valid action output compared with the deterministic baseline. The agent-enhanced workflow produced the expected \texttt{fan\_on} and \texttt{fan\_off} middleware actions for the same two defined temperature cases, as reported in Table~\ref{tab:agent-results}. The screenshot evidence also shows that the workflow produced structured action output and parsed the action before routing it to the middleware endpoint.
+
+The main value of the agent-enhanced path is therefore not that it outperforms the deterministic baseline. In this simple temperature scenario, the deterministic rule is easier to explain and is sufficient for the task. The value of the agent path is that it demonstrates how an LLM decision step can be constrained to fit into the same contract-shaped action pipeline. In other words, the agent output is not treated as free text that directly controls an action. It is expected to become an action object with fields such as \texttt{action\_id}, \texttt{target}, \texttt{reason}, and \texttt{requires\_approval}, which can then be parsed, inspected, and routed.
+
+This is consistent with the design rationale in Chapter~\ref{sec:system-design}: the agent is introduced as a limited decision component, not as a general autonomous system. Work on LLM reasoning and action shows why action-producing language models are relevant to workflow systems \cite{reactYao2023}, but the thesis uses only a much smaller pattern. It does not implement a ReAct loop, multiple tools, persistent memory, or multi-agent coordination.
+
+The limitations of RQ2 are therefore substantial. The evidence is based on one prompt setup, one configured model path, and the same two temperature cases as the deterministic baseline. There is no model comparison, no adversarial prompting, no larger test set, and no repeated-run analysis that could support broader consistency claims. The results support the narrower claim that the agent-enhanced workflow can produce contract-shaped action output for the defined cases, while leaving broader agent reliability as future work.
+
+\subsection{Discussion of RQ3: Latency, Resource, and Deployment Behavior}\label{subsec:discussion-rq3-latency-resource-deployment}
+
+RQ3 asks what latency, resource, and deployment behavior is observed during local execution and Raspberry Pi middleware validation. The local evaluation harness produced raw CSV evidence for both deterministic and agent-enhanced workflow runs, and the Raspberry Pi validation produced full-workflow evidence for the PC-hosted n8n workflow calling the Pi-hosted middleware endpoint. These results show that the proof-of-concept can be measured, but they should be interpreted as limited validation evidence rather than benchmarking.
+
+The distinction between full workflow latency and direct endpoint latency is important. The full workflow values include the PC-hosted n8n workflow path and the HTTP call to the middleware endpoint. The direct Raspberry Pi endpoint values measure only the middleware endpoint response and do not include n8n webhook execution or workflow routing. For this reason, the direct endpoint values are useful supporting evidence, but they cannot replace the full workflow values in Table~\ref{tab:pi-full-workflow-results}.
+
+The CPU, RAM, and thermal observations also have limited scope. Local PC resource values were collected through best-effort Docker statistics where available, while local thermal values were recorded as \texttt{not\_available}. The Raspberry Pi evidence includes middleware process CPU/RAM observations and a separately documented thermal value. These observations are useful because they show that the evaluation harness can capture resource-related evidence, but the small run count and limited workload mean they cannot be used to claim stable performance characteristics.
+
+The deployment behavior is nevertheless meaningful for the thesis. The Pi validation shows that the action endpoint side can be moved to separate hardware while keeping n8n on the PC. This supports the edge-computing motivation in a limited way \cite{edgeComputingSatyanarayanan,iotSurveyAtzori}. The validation does not prove a complete edge deployment, but it demonstrates the split architecture that the thesis actually implemented.
+
+\subsection{Role of Middleware, Contracts, and Validation}\label{subsec:discussion-middleware-contracts-validation}
+
+The middleware boundary is one of the most important design choices in the thesis. Without it, workflow or agent output could be treated as direct action execution. By placing Python middleware between the workflow and the simulated fan action, the architecture creates a controlled place where action requests can be represented, inspected, routed, and later replaced with real hardware-specific behavior if the scope is expanded.
+
+The JSON contracts support this boundary by reducing ambiguity. A workflow that emits loose text is difficult to evaluate objectively because the report must infer whether the text means \texttt{fan\_on}, \texttt{fan\_off}, or something else. A contract-shaped action object gives the system explicit fields and allowed values. JSON Schema is therefore useful not because it makes the proof-of-concept production ready, but because it gives the report a precise structure for discussing action validity \cite{jsonSchemaDocs}.
+
+The documented validation design adds a safety-oriented interpretation of the same boundary. It distinguishes allowed fan actions, malformed actions, and risky or unknown actions. This is especially important when LLM output is part of the workflow, because generated output may be syntactically wrong, semantically unsupported, or outside the approved action set. Human-in-the-loop ideas are relevant here because risky automation often requires human review before execution \cite{humanInTheLoopAmershi2014}.
+
+However, the boundary remains a minimum design in this implementation. The safety cases document what should be allowed, blocked, or rejected for direct execution, but the thesis does not claim a production safety layer. The practical contribution is a clear contract and validation target that future runtime enforcement could implement more completely.
+
+\subsection{Broader Relevance and Possible Use Cases}\label{subsec:discussion-broader-relevance}
+
+The fan example is intentionally small, but the broader relevance is not the fan itself. The broader pattern is an event-validation-action pipeline: an event is received, a workflow selects or produces an action, the action is represented through a shared contract, a validation boundary limits what may proceed, middleware executes the action, and the evaluation harness records evidence. This pattern is relevant to several real-world domains, provided that future work adds the missing production and hardware layers.
+
+In smart building control, a similar pattern could be used for ventilation, heating, lighting, or occupancy-related actions \cite{smartBuildingsMinoli2017}. In industrial monitoring, it could support alerts or controlled responses to temperature, vibration, or process-state events \cite{industrialIotXu2018}. In environmental sensing, the same architecture could be adapted to air quality, humidity, water-level, or greenhouse monitoring. In health and environment monitoring contexts, the pattern could support event-driven notifications or approved actions where traceability and validation are important.
+
+These use cases were not implemented in the thesis. The current system does not include real building equipment, industrial devices, environmental sensor networks, or health-monitoring infrastructure. The fan scenario should therefore be understood as a controlled proxy. It shows how the architecture could be extended, not that those extensions have already been validated.
+
+\subsection{Ethical and Societal Considerations}\label{subsec:discussion-ethical-societal}
+
+Automated and AI-assisted workflows become more sensitive when their outputs can trigger physical actions. Even a simple fan example illustrates the issue: once a workflow decision becomes an action request, the system needs clear boundaries around what is allowed to happen. This becomes more important in domains such as buildings, industrial systems, environmental monitoring, or health-related contexts, where incorrect actions may affect comfort, equipment, safety, or trust.
+
+For that reason, validation before execution is not only a technical design choice but also an ethical one. The system should make it possible to inspect what action was requested, why it was requested, whether it matched an approved contract, and whether it should require human review. The documented validation design and human-approval case are limited, but they point toward this responsibility: risky or unknown outputs should not be executed directly simply because a workflow or agent produced them.
+
+Transparency and traceability are also important. CSV result files, workflow screenshots, action contracts, and documented safety cases make the proof-of-concept easier to audit than a system that only performs actions silently. This is especially relevant when AI tools are used in engineering work. The use of AI-assisted writing or workflow design should remain visible, and generated suggestions should be checked against the repository evidence rather than treated as authoritative.
+
+\subsection{Future Work}\label{subsec:discussion-future-work}
+
+The most direct future extension is full n8n deployment on Raspberry Pi. That work would need to evaluate installation complexity, storage behavior, container performance, resource use, and workflow stability on the Pi itself. It should be treated as a separate deployment study rather than silently merged into the current proof-of-concept.
+
+A second extension is real GPIO sensor and fan hardware. Replacing the simulated middleware endpoints with physical input and output would make the system more realistic, but it would also require hardware safety checks, electrical validation, physical error handling, and more careful risk analysis. The current middleware boundary would still be useful because it separates workflow decisions from hardware-specific control.
+
+The evaluation could also be strengthened through repeated measurements with a larger run count, boundary-value cases around the \texttt{30.0 C} threshold, malformed input tests, longer-running execution, and clearer regenerated processed summaries. Stronger runtime safety enforcement is another important future step. The documented allowed, blocked, and risky cases should be implemented as runtime checks with logs that prove whether actions were allowed, rejected, or sent for human review.
+
+Finally, the agent-enhanced path could be expanded cautiously. Future work could test more realistic IoT scenarios, alternative prompts, multiple model setups, or broader agent workflows. Such work should remain contract-bound and measurable. A broader multi-agent system would be a different research scope and should only be introduced if the evaluation design is expanded accordingly.
+
+\subsection{Summary of Discussion}\label{subsec:discussion-summary}
+
+The results support the main thesis argument within the defined project scope. The deterministic workflow produced the expected actions for the defined cases, and the minimal agent-enhanced workflow produced structured action output that could fit into the same action pipeline. The evaluation harness produced inspectable CSV evidence, and the Raspberry Pi validation showed that the middleware/action endpoint side could run on separate hardware while n8n remained on the PC.
+
+The contribution is therefore not the simulated fan action by itself. The contribution is the measured workflow-to-action architecture: PC-hosted n8n, Python middleware, shared JSON contracts, documented validation design, CSV-based evaluation, and limited Raspberry Pi middleware validation. The work remains bounded, but that boundedness is what allows the thesis to make a clear and honest argument.

@@ -14,6 +14,7 @@ middleware/action endpoint side.
 Use these files as the final Step 10 evidence set:
 
 - `pi-validation-notes.md`
+- `pi-startup-ip-transcript.md`
 - `pi-workflow-run-final.csv`
 - `pi-run-01.csv`
 - `2. Measure direct Pi middleware latency.png`
@@ -33,6 +34,10 @@ Use these files as the final Step 10 evidence set:
 
 `pi-run-01.csv` records the supporting Tier 1.5 summary, including direct
 middleware latency, CPU/RAM observations, and thermal evidence.
+
+`pi-startup-ip-transcript.md` records the observed Pi IP, middleware startup
+command, middleware base URL, and the PC-hosted n8n HTTP action URLs used for
+the Tier 1.5 split validation.
 
 ## Non-Final Files
 

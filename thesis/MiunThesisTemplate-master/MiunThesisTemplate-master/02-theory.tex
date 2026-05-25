@@ -1,68 +1,49 @@
 \section{Theory and Related Work}\label{sec:theory}
-% Chapter purpose: give the reader enough theoretical background to understand the design and evaluation.
-% It should not broaden the thesis into a survey of multi-agent systems or model benchmarking.
-% Course/template source: Word template asks for theory, scientific base, background knowledge, and related work.
-% Missing checks: [CHECK VALUE: collect verified references before prose drafting].
+
+This chapter presents the theoretical background needed to understand the proof-of-concept developed in this thesis. The focus is on workflow automation, IoT-style event-action systems, middleware boundaries, structured contracts, deterministic and agent-enhanced workflows, validation, and limited edge-hardware validation. The chapter does not attempt to survey all IoT platforms, all workflow engines, or all agent architectures. Instead, it introduces the concepts that are needed to justify and interpret the implemented system.
 
 \subsection{Workflow Automation and Orchestration}\label{subsec:workflow-automation}
-% Discuss: workflow engines as coordination layers for event-action pipelines.
-% Source files: infrastructure/docker/README.md; docs/architecture/README.md.
-% Figures/tables: no figure required.
-% References needed: [REFERENCE NEEDED: workflow automation/orchestration source].
-% Missing checks: [CHECK VALUE: choose one or two strong sources, not a broad survey].
 
-\subsection{n8n as a Workflow Automation Platform}\label{subsec:n8n}
-% Discuss: n8n only as used here: self-hosted local workflow engine with webhook and HTTP request nodes.
-% Source files: infrastructure/docker/docker-compose.yml; docs/n8n-version.md; cognitive_logic/workflows/*.md.
-% Figures/tables: no figure required here; workflow figures belong in Chapter 5.
-% References needed: [REFERENCE NEEDED: n8n official documentation].
-% Missing checks: [CHECK VALUE: exact n8n version and relevant node documentation].
+Workflow automation concerns the coordination of tasks, decisions, and integrations through an explicit process structure. A workflow can start from an event, apply decision logic, transform data, and call external systems. This makes workflow automation useful in event-action systems where the purpose is not only to compute a value, but to connect an incoming event to a controlled response. Workflow patterns are a well-established way of describing recurring control-flow structures such as branching, routing, and synchronization \cite{workflowPatternsAalst}.
 
-\subsection{Middleware and API Boundary Design}\label{subsec:middleware-theory}
-% Discuss: middleware as the controlled bridge between workflow logic and action endpoints.
-% Source files: middleware/api/app.py; middleware/api/routes.py; middleware/webhooks/n8n_sender.py.
-% Figures/tables: no figure required.
-% References needed: [REFERENCE NEEDED: middleware/API design source].
-% Missing checks: [CHECK VALUE: decide whether a REST/API reference is necessary].
+In this thesis, workflow automation is used as an orchestration layer. The workflow engine receives a temperature event, evaluates the event, and calls middleware endpoints. n8n is the workflow platform used for this purpose. It provides a self-hostable workflow environment with nodes for triggers, data handling, and HTTP calls \cite{n8nDocs}. The choice of n8n is not treated as a comparison against other workflow tools; it is the concrete orchestration platform used to implement and evaluate the thesis architecture.
 
-\subsection{IoT-Style Event-Action Systems}\label{subsec:iot-event-action}
-% Discuss: sensor event ingestion, decision logic, and action execution as a general pattern.
-% Source files: shared_interfaces/json-schema/sensor-event.schema.json; evaluation/datasets/test-cases.json.
-% Figures/tables: no figure required.
-% References needed: [REFERENCE NEEDED: IoT event/action or edge computing source].
-% Missing checks: [CHECK VALUE: keep fan scenario framed as controlled proxy only].
+\subsection{IoT Event-Action Systems and Edge Computing}\label{subsec:iot-edge}
 
-\subsection{JSON Contracts and Structured Action Formats}\label{subsec:json-contracts}
-% Discuss: why explicit schemas help keep workflow and middleware behavior reproducible.
-% Source files: shared_interfaces/json-schema/sensor-event.schema.json; shared_interfaces/json-schema/agent-action.schema.json; shared_interfaces/examples/*.json.
-% Figures/tables: optional table summarizing required action fields.
-% References needed: [REFERENCE NEEDED: JSON Schema documentation].
-% Missing checks: [CHECK VALUE: confirm whether runtime JSON Schema validation is implemented or only specified].
+IoT systems commonly involve devices, sensors, network communication, data processing, and actions in the physical or operational environment. A sensor event may represent a temperature reading, a state change, or another observation that requires a response. The response may be an alert, a control action, or a decision to do nothing. This event-action pattern is central to the thesis scenario, where a temperature event is used to select a simulated fan action. Broader IoT research identifies this kind of connection between sensing, computation, and action as a core part of Internet of Things systems \cite{iotSurveyAtzori}.
 
-\subsection{Deterministic and Minimal Agent-Enhanced Workflows}\label{subsec:deterministic-agent-theory}
-% Discuss: deterministic threshold rules versus a constrained LLM-assisted decision step.
-% Source files: cognitive_logic/workflows/deterministic-baseline.md; cognitive_logic/workflows/agent-minimal.md; cognitive_logic/prompts/system-prompt-v1.md; cognitive_logic/memory/memory-choice-v1.md.
-% Figures/tables: no figure required here; use Chapter 5 for workflow screenshots.
-% References needed: [REFERENCE NEEDED: LLM agent workflow or structured-output source].
-% Missing checks: [CHECK VALUE: avoid broad multi-agent or model-comparison framing].
+Edge computing is relevant when some processing or action endpoint is moved closer to the device or environment rather than keeping all functionality in a central server or cloud system. Edge computing can reduce reliance on distant infrastructure and can support latency-sensitive or context-specific behavior \cite{edgeComputingSatyanarayanan}. In this thesis, Raspberry Pi is used only as limited edge-style hardware for middleware/action endpoint validation. Raspberry Pi is a small computing platform that can run software services and connect to hardware interfaces \cite{raspberryPiDocs}. The thesis does not evaluate a complete edge deployment; it uses Raspberry Pi to validate the middleware/action side of the architecture.
 
-\subsection{Safety Validation and Human-in-the-Loop Concepts}\label{subsec:safety-hitl-theory}
-% Discuss: validation and approval as concepts, while making clear this thesis implements a minimum design and case set only.
-% Source files: safety_layer/policies/action-policy-v1.md; safety_layer/parsers/output-validation-v1.md; safety_layer/approvals/hitl-v1.md; safety_layer/examples/*.md.
-% Figures/tables: optional table with allowed, blocked, and risky case categories.
-% References needed: [REFERENCE NEEDED: safety validation or human-in-the-loop source].
-% Missing checks: [CHECK VALUE: do not claim production-grade enforcement].
+\subsection{Middleware and API Boundaries}\label{subsec:middleware-theory}
 
-\subsection{Edge Computing and Raspberry Pi Validation Context}\label{subsec:edge-pi-theory}
-% Discuss: why a Raspberry Pi can be used as a limited validation target for middleware/action endpoints.
-% Source files: infrastructure/os/raspberry-pi-notes.md; infrastructure/docker/pi-deployment-notes.md; evaluation/results/pi-validation/README.md.
-% Figures/tables: no figure required.
-% References needed: [REFERENCE NEEDED: Raspberry Pi documentation], [REFERENCE NEEDED: edge computing source].
-% Missing checks: [CHECK VALUE: state that n8n stayed on the PC].
+Middleware is useful when a system needs to separate decision logic from action execution. In an event-action architecture, the workflow should not necessarily be the component that directly controls hardware-facing behavior. A middleware/API layer can receive a structured action request, expose a small set of endpoints, and isolate workflow logic from the internal details of the action implementation. This separation makes the system easier to reason about because the workflow, contract, validation design, and action endpoint can be discussed as separate parts of the architecture \cite{fieldingRest2000,httpSemanticsRfc9110}.
 
-\subsection{Related Work}\label{subsec:related-work}
-% Discuss: a small number of related works that connect workflow automation, IoT/edge systems, contract-based integration, and constrained agent workflows.
-% Source files: none in repository currently provide external related-work references.
-% Figures/tables: optional comparison table if sources are gathered.
-% References needed: [REFERENCE NEEDED: 2-4 related scientific works].
-% Missing checks: [CHECK VALUE: find verified sources; do not invent citations].
+In this thesis, the middleware/API boundary is especially important because both deterministic workflow output and agent-enhanced workflow output may lead to fan actions. Routing those actions through middleware prevents the workflow or agent step from being treated as direct hardware control. It also creates a location where simulated endpoints can later be replaced by physical device control, provided that additional validation and safety work is added.
+
+\subsection{Structured Data, JSON Contracts, and Validation}\label{subsec:json-contracts}
+
+Structured data formats reduce ambiguity between connected components. If a workflow emits only free text, the receiving system must infer the intended action. If the workflow emits a structured object, the receiving system can inspect fields, allowed values, and missing data more consistently. This is why the thesis uses JSON-style sensor and action contracts rather than relying on informal text output.
+
+JSON Schema provides a vocabulary for describing and validating the structure of JSON data \cite{jsonSchemaDocs}. At a theory level, a schema can define required fields, allowed values, and whether unexpected fields are permitted. In an event-action system, this makes it possible to describe what a valid sensor event or action request should look like. In this thesis, structured contracts support predictable routing and provide a basis for discussing validation. They do not by themselves guarantee production safety, but they make the intended boundary explicit.
+
+\subsection{Deterministic Workflows}\label{subsec:deterministic-workflows}
+
+A deterministic workflow uses fixed logic to map inputs to outputs. Given the same input and the same workflow configuration, the expected decision path is the same. In the thesis scenario, the deterministic baseline uses a temperature threshold: a value at or above the threshold leads to \texttt{fan\_on}, while a lower value leads to \texttt{fan\_off}.
+
+Deterministic workflows are useful as baselines because their behavior is transparent and inspectable. The rule can be stated directly, the expected output can be defined before execution, and deviations can be identified clearly. This makes the deterministic baseline important for evaluating the rest of the proof-of-concept. It shows whether the basic workflow, middleware, action endpoints, and evaluation harness work for the defined temperature cases before the agent-enhanced path is considered.
+
+\subsection{Minimal Agent-Enhanced Workflows}\label{subsec:agent-enhanced-workflows}
+
+An agent-enhanced workflow includes a decision step where a language model contributes to selecting or producing an action. In broader research, language-model agents may combine reasoning and acting by producing intermediate reasoning steps, using tools, and interacting with external environments \cite{reactYao2023}. This thesis uses a much smaller version of that idea. The agent-enhanced path contains a single LLM-based decision step that is expected to produce structured action output for the same temperature-to-fan scenario as the deterministic baseline.
+
+The important theoretical point is not broad autonomy. The important point is that an LLM decision step can be placed inside a workflow, constrained by a prompt, and connected to a structured output pipeline. For this thesis, the output is expected to fit the action contract and route to the same middleware endpoints as the deterministic baseline. This allows the agent-enhanced workflow to be compared with the deterministic workflow without changing the action execution layer.
+
+\subsection{Safety, Validation, and Human-in-the-Loop Concepts}\label{subsec:safety-hitl-theory}
+
+When workflow or agent output can trigger actions, validation becomes important. A system should be able to distinguish between an allowed action, a malformed action, and a risky or unsupported action. In the thesis scenario, allowed actions are limited to the simulated fan actions, while malformed or unknown actions should not be treated as valid action requests.
+
+Human-in-the-loop concepts are relevant when automation may require review before execution. Human involvement can help with cases where automated output is uncertain, risky, or outside the expected action set. Research on interactive machine learning emphasizes the role of humans in guiding and controlling machine-assisted systems \cite{humanInTheLoopAmershi2014}. In this thesis, the safety material remains a documented validation and approval design. It supports reasoning about allowed, blocked, and risky cases, but it is not evidence of production-grade runtime enforcement.
+
+\subsection{Summary of Theory}\label{subsec:theory-summary}
+
+The theory in this chapter supports the thesis architecture as a combination of workflow automation, IoT-style event-action logic, middleware separation, structured JSON contracts, deterministic baseline behavior, a constrained agent-enhanced decision step, validation concepts, and limited Raspberry Pi middleware validation. Together, these concepts explain why the implemented system is structured as a controlled workflow-to-action proof-of-concept rather than as a broad IoT platform or general multi-agent system.
