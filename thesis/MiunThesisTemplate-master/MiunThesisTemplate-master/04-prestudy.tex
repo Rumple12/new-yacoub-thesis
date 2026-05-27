@@ -1,6 +1,7 @@
 \section{Choice of Approach / System Design}\label{sec:system-design}
 
-This chapter explains the design choices that shaped the final proof-of-concept before the implementation details are presented. The purpose is to justify why the system was designed as a bounded workflow-to-action pipeline rather than as a broader automation platform, hardware project, or multi-agent system.
+
+This chapter explains the design choices that shaped the proof-of-concept before the implementation details are presented. The purpose is to justify the selected workflow-to-action architecture, including the PC-hosted n8n runtime, Python middleware boundary, deterministic and agent-enhanced decision paths, validation design, and Raspberry Pi middleware validation.
 
 \subsection{Design Requirements and Constraints}\label{subsec:design-requirements-constraints}
 
@@ -8,17 +9,17 @@ The system design was constrained by the need to produce a measurable and finish
 
 The system also needed a clear separation between workflow logic and action execution. The workflow engine could decide which action should be taken, but it should not be treated as a direct hardware controller. This led to a design where n8n handles workflow orchestration, while Python middleware exposes the API boundary for action execution. This separation improves explainability because the report can distinguish event handling, decision logic, validation, middleware behavior, and simulated action execution.
 
-Another requirement was structured communication between the workflow side and the action side. The design therefore uses JSON contracts for sensor events and action outputs instead of relying on loose text. This supports predictable routing, validation, and evaluation. The evaluation itself also needed to produce evidence that could be inspected and reused in the report, so lightweight CSV files were chosen as the main result format. Raspberry Pi validation was included only to support the edge-computing angle: it tests the middleware/action endpoint on separate hardware while avoiding a full Raspberry Pi deployment project.
+Another requirement was structured communication between the workflow side and the action side. The design therefore uses JSON contracts for sensor events and action outputs instead of relying on loose text. The contracts support predictable routing, validation, and evaluation. The evaluation itself also needed to produce evidence that could be inspected and reused in the report, so lightweight CSV files were chosen as the main result format. Raspberry Pi validation was included to support the edge-computing angle: it tests the middleware/action endpoint on separate hardware while avoiding a full Raspberry Pi deployment project.
 
 \subsection{Alternatives Considered}\label{subsec:alternatives-considered}
 
-Several broader alternatives were considered but not selected because they would have shifted the focus of the thesis. A full n8n deployment on Raspberry Pi would have made the project more hardware- and deployment-oriented. That alternative may be valuable in future work, but it would also introduce operating-system, container, storage, and performance variables that are not necessary for answering the current research questions. The selected alternative keeps n8n on the PC and validates only the middleware/action endpoint on Raspberry Pi hardware.
+Several broader alternatives were considered but not selected because they would have shifted the focus of the thesis. A full n8n deployment on Raspberry Pi would have made the project more hardware- and deployment-oriented. That alternative may be valuable in future work, but it would also introduce operating-system, container, storage, and performance variables that are not necessary for answering the current research questions \cite{containerVirtualizationMorabito2017}. The selected alternative keeps n8n on the PC and validates only the middleware/action endpoint on Raspberry Pi hardware.
 
 Another alternative was to let workflow nodes call hardware-facing actions directly. This was rejected because it would blur the safety and contract boundary. A middleware/API boundary makes the action path explicit and gives the system a single place where workflow output can be translated into controlled action execution. It also keeps future hardware integration possible without requiring workflow nodes or agent output to become direct device-control mechanisms.
 
 The workflow design also required a choice between a deterministic-only system and a system with both deterministic and agent-enhanced paths. A deterministic-only workflow would be easier to explain and measure, but it would not test whether an LLM decision step can produce structured action output for the same event-action task. The chosen design therefore includes both: a deterministic threshold baseline and a minimal agent-enhanced workflow. The agent path is intentionally small and is not used as a basis for model benchmarking or broad multi-agent behavior.
 
-For workflow output, loose natural-language text was rejected in favor of a shared JSON contract. Free-form text would make routing, validation, and comparison harder to report objectively. A contract-shaped action object gives the system clear expected fields and allowed values. Similarly, a full runtime safety enforcement system was rejected as too large for the bounded implementation. Instead, the thesis uses a documented validation design with allowed, blocked, and risky cases. This is sufficient for describing the intended safety boundary, while still being honest that production-grade enforcement is not implemented.
+For workflow output, loose natural-language text was rejected in favor of a shared JSON contract. Free-form text would make routing, validation, and comparison harder to report objectively. A contract-shaped action object gives the system clear expected fields and allowed values. Similarly, a full runtime safety enforcement system was outside the defined implementation. Instead the report uses a documented validation design with allowed, blocked, and risky cases. That is enough to describe the intended safety boundary while keeping clear that production-grade enforcement is not implemented.
 
 Real GPIO fan control was also considered outside the current scope. Physical hardware would add electrical and device-specific variables that are not needed to evaluate the workflow, middleware, contract, validation, and measurement pipeline. The chosen simulated fan endpoint keeps the test controlled. Finally, a heavy monitoring stack such as Prometheus or Grafana was rejected in favor of CSV-based evaluation scripts. CSV output is less sophisticated, but it is transparent, repeatable, and proportionate to the scale of the thesis.
 
@@ -30,26 +31,37 @@ The shared JSON contracts define the sensor-event and action-output boundary. Th
 
 Limited Raspberry Pi validation is included by moving the middleware/action endpoint to Raspberry Pi hardware while n8n remains running on the PC. This design keeps the workflow engine stable and repeatable while still testing whether the PC-hosted workflow can call an edge-side endpoint over the network.
 
+The resulting report-level architecture is shown in Figure~\ref{fig:final-architecture}.
+
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\textwidth]{Figures/final-architecture-report.png}
-  \caption{Final focused proof-of-concept architecture used in the thesis.}
+  \includegraphics[width=\textwidth]{Figures/final-architecture-report.mmd.png}
+  \caption{Report-level architecture of the implemented workflow-to-action system.}
   \label{fig:final-architecture}
 \end{figure}
 
 \subsection{Rationale for PC-Hosted n8n and Raspberry Pi Middleware Validation}\label{subsec:rationale-pc-n8n-pi-middleware}
 
-PC-hosted n8n was chosen for stability, repeatability, and reduced deployment risk. The local Docker-based setup provides a consistent workflow runtime and avoids making the thesis dependent on whether n8n itself can be optimized for Raspberry Pi hardware. This keeps the workflow comparison focused on behavior and measurement rather than on platform-specific installation issues \cite{n8nDocs,dockerDocs}.
 
-Raspberry Pi middleware validation was included for a specific purpose. It tests whether the action endpoint side can run on separate hardware and be reached from the PC-hosted workflow over the network. This supports the edge-computing motivation without turning the project into a full edge deployment or optimization study \cite{raspberryPiDocs,edgeComputingSatyanarayanan,iotSurveyAtzori}.
 
-The design therefore does not claim n8n-on-Pi deployment. It claims only that the PC-hosted n8n workflow was designed to call a Raspberry Pi-hosted middleware/action endpoint during validation. This distinction matters because the resource and deployment implications of running n8n itself on Raspberry Pi would be different from running only the middleware endpoint.
+
+PC-hosted n8n was chosen for stability, repeatability, and reduced deployment risk. The local Docker-based setup provides a consistent workflow runtime and avoids making the thesis dependent on whether n8n itself can be optimized for Raspberry Pi hardware. The workflow comparison can then focus on behavior and measurement rather than on platform-specific installation issues \cite{n8nDocs,dockerDocs}.
+
+
+
+The Raspberry Pi validation was included to test the action-endpoint side of the architecture on separate hardware. In this design, the PC-hosted workflow sends requests over the network to a Raspberry Pi-hosted middleware/action endpoint. This preserves the main workflow setup while still giving evidence about edge-style middleware deployment and networked action handling \cite{raspberryPiDocs,edgeComputingSatyanarayanan,iotSurveyAtzori}.
+
+
+The chosen design therefore separates workflow orchestration from edge-side action execution. Running the full n8n workflow runtime on Raspberry Pi would introduce a different deployment and resource question, so that extension is treated as future work rather than as part of the evaluated design.
 
 \subsection{Rationale for Deterministic and Agent-Enhanced Paths}\label{subsec:rationale-deterministic-agent}
 
-The deterministic path provides a predictable baseline. It uses a fixed temperature threshold and therefore gives the evaluation a simple comparison point: for the defined high-temperature case, the expected action is \texttt{fan\_on}; for the defined low-temperature case, the expected action is \texttt{fan\_off}. This baseline is important because it separates basic workflow correctness from the additional uncertainty introduced by an LLM decision step.
+The deterministic path provides a predictable baseline. It uses a fixed temperature threshold and gives the evaluation a simple comparison point: for the defined high-temperature case, the expected action is \texttt{fan\_on}; for the defined low-temperature case, the expected action is \texttt{fan\_off}. This baseline separates expected workflow correctness from the additional uncertainty introduced by an LLM decision step.
 
-The minimal agent-enhanced path was selected to test a specific and limited question: whether an LLM decision step can produce contract-shaped action output for the same controlled event-action scenario. The agent path is therefore deliberately small. It uses one prompt set, one memory choice, and the same middleware endpoints as the deterministic baseline. The comparison is about structured action output and observed behavior on the defined cases, not about broad autonomy, model ranking, or multi-agent design \cite{workflowPatternsAalst,reactYao2023}.
+
+The minimal agent-enhanced path was selected to test whether an LLM decision step can produce contract-shaped action output for the same controlled event-action task. The agent path uses one prompt set, one memory choice, and the same middleware endpoints as the deterministic baseline. This makes the comparison focused on structured action output and observed behavior for the defined temperature cases.
+
+
 
 \subsection{Rationale for Middleware, Contracts, and Validation}\label{subsec:rationale-middleware-contracts-validation}
 
@@ -57,7 +69,7 @@ The middleware boundary was chosen because workflow or agent output should not b
 
 The JSON contracts make this boundary explicit. The sensor-event contract defines the input structure, and the action contract defines the allowed output structure. Contract-shaped messages make the system easier to inspect and evaluate because the report can compare expected fields, allowed actions, and observed routing behavior \cite{jsonSchemaDocs}.
 
-The documented validation design adds a safety-oriented boundary around the action contract. It defines allowed output, malformed output, and risky or unknown output. This improves explainability and reportability, but it should not be confused with a fully enforced safety system. The implemented thesis artifact contains a documented validation design, not production-grade runtime safety enforcement.
+The documented validation design adds a safety-oriented boundary around the action contract. It defines allowed output, malformed output, and risky or unknown output. The design improves explainability and reportability, but it should not be confused with a fully enforced safety system. The implemented thesis artifact contains a documented validation design, not production-grade runtime safety enforcement.
 
 \subsection{Rationale for Simulated Fan Actions}\label{subsec:rationale-simulated-fan}
 
@@ -69,8 +81,8 @@ No real GPIO hardware was controlled in the chosen design. This is a limitation,
 
 The evaluation design uses CSV files because they are transparent, easy to inspect, and sufficient for the scale of the thesis. The collection script records raw observations, and the aggregation script produces processed summaries. This gives the report concrete evidence without requiring a large monitoring stack.
 
-The scripts \texttt{collect\_metrics.py} and \texttt{aggregate\_results.py} support repeatable measurement of action outcomes, latency, and resource values where available. This is intentionally smaller than a full observability platform. The evaluation is thesis-scoped and small-scale; it is not designed as large-scale benchmarking across devices, models, or deployment environments.
+The scripts \texttt{collect\_metrics.py} and \texttt{aggregate\_results.py} support repeatable measurement of action outcomes, latency, and resource values where available. This lightweight approach fits the scale of the thesis better than a full observability platform. The evaluation is thesis-scoped and small-scale; it is not designed as large-scale benchmarking across devices, models, or deployment environments.
 
 \subsection{Summary of Chosen Approach}\label{subsec:chosen-approach-summary}
 
-The chosen approach gives the thesis a complete workflow-to-action proof-of-concept while keeping the system bounded and explainable. PC-hosted n8n provides the workflow runtime, Python middleware provides the action boundary, shared JSON contracts make the event and action structures explicit, documented validation cases describe the safety boundary, simulated fan endpoints keep the scenario controlled, CSV files provide measurable evidence, and Raspberry Pi middleware validation adds limited separate-hardware evidence without changing the core architecture.
+The chosen approach gives the thesis a complete workflow-to-action proof-of-concept while keeping the system focused and explainable. PC-hosted n8n provides the workflow runtime, Python middleware provides the action boundary, shared JSON contracts make the event and action structures explicit, documented validation cases describe the safety boundary, simulated fan endpoints keep the scenario controlled, CSV files provide measurable evidence, and Raspberry Pi middleware validation adds separate-hardware evidence without changing the core architecture.

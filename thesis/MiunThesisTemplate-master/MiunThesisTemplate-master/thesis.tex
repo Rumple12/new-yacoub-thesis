@@ -1,7 +1,7 @@
 % Author of the LaTeX class is Lennart Franked.
 % Main author of the original thesis-template contents is Stefan Forsstrom at Mid Sweden University.
 % This repository keeps the MIUN LaTeX template as the output format and replaces
-% the example body text with a report-writing skeleton for the narrowed new-yacoub thesis.
+% the example body text with a report-writing skeleton for the focused thesis report.
 
 \documentclass[english]{miunthesis}
 \usepackage{csquotes}
@@ -14,7 +14,9 @@
 \usepackage{ragged2e}
 \usepackage{xurl}
 \usepackage{seqsplit}
+\usepackage{caption}
 
+\captionsetup[figure]{font=small,labelfont={bf,it},textfont=it}
 \newcommand{\codepath}[1]{\texttt{\seqsplit{#1}}}
 \newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
 \newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
@@ -23,21 +25,20 @@
 \addbibresource{literature.bib}
 
 \title{[CHECK VALUE: final thesis title]}
-\subtitle{PC-hosted n8n, Python middleware, shared contracts, and Tier 1.5 Raspberry Pi validation}
+\subtitle{PC-hosted n8n, Python middleware, shared contracts, and Raspberry Pi Middleware/Action-Endpoint Validation}
 \author{[CHECK VALUE: author name]}
 
-\projecttype{[CHECK VALUE: DT099G thesis project type]}
+\projecttype{Bachelor Thesis}
 
-\fieldofstudy{Computer Engineering}
+\fieldofstudy{Computer Science}
 \coursecredits{15 hp}
 
-\supervisor{[CHECK VALUE: supervisor name]}
-\examiner{[CHECK VALUE: examiner name]}
+\supervisor{Ali Hasasn}
+\examiner{Patrik Österberg}
 
 \coursecode{DT099G}
-\registrationnr{[CHECK VALUE: registration number]}
 
-\studyprogramme{[CHECK VALUE: study programme or course]}
+\studyprogramme{Master of Science in Engineering - Computer Engineering}
 
 \begin{document}
   \maketitle
