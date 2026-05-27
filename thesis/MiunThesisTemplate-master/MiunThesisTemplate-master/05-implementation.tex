@@ -82,7 +82,7 @@ if temperature \(\geq 30.0\) C, request \texttt{fan\_on}; otherwise, request \te
 
 When the temperature is at or above the threshold, the workflow creates an action object corresponding to \texttt{fan\_on} and calls the local \texttt{POST /fan/on} endpoint. When the temperature is below the threshold, it creates an action object corresponding to \texttt{fan\_off} and calls the local \texttt{POST /fan/off} endpoint. The host-Docker bridge address is used because n8n runs inside Docker while the middleware runs on the host during local PC execution.
 
-The deterministic workflow exists for two reasons. First, it provides a predictable reference behavior for the same temperature-to-fan task used by the agent-enhanced workflow. Second, it gives the evaluation a simple baseline against which action correctness, consistency, and latency can be compared. The baseline does not use prompts, memory, model calls, safety approval nodes, GPIO, or Raspberry Pi deployment.
+The deterministic workflow exists for two reasons. First, it provides a predictable reference behavior for the same temperature-to-fan task used by the agent-enhanced workflow. Second, it gives the evaluation a simple baseline against which action correctness and latency observations can be compared. The baseline does not use prompts, memory, model calls, safety approval nodes, GPIO, or Raspberry Pi deployment.
 
 The deterministic n8n workflow canvas is shown in Figure~\ref{fig:deterministic-workflow-canvas}.
 

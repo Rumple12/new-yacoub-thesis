@@ -86,7 +86,7 @@ The documented safety and validation cases are summarized in Table~\ref{tab:safe
   \end{tabularx}
 \end{table}
 
-The processed safety-outcome file exists, but it currently contains only the header row. It does not contain runtime safety-enforcement rows. The safety result in this chapter is therefore reported as documented validation-case evidence only, not as proof of a full runtime safety framework or production-grade enforcement path.
+The safety result is based on documented validation cases rather than runtime enforcement logs. The processed safety-outcome file contains only the header row, so the safety layer should be interpreted as a validation design and future implementation target rather than as measured runtime enforcement.
 
 \subsection{Evaluation Harness Outputs}\label{subsec:results-harness-outputs}
 
@@ -166,6 +166,8 @@ The main full-workflow Pi validation evidence is stored in the Raspberry Pi vali
 \end{table}
 
 These latency values are full workflow values for the PC-hosted n8n workflow calling the Raspberry Pi middleware. They are separate from direct middleware endpoint latency. The direct endpoint measurements are supporting evidence only because they do not include n8n webhook execution or workflow routing.
+
+The Raspberry Pi high-temperature full-workflow latency is slightly lower than the corresponding local deterministic latency. This should not be interpreted as evidence that the Raspberry Pi setup is generally faster. The latency values are single-run observations and can be affected by webhook execution, Docker state, network timing, and normal runtime variation. Repeated runs would be needed before making a stable performance comparison.
 
 Figure~\ref{fig:pi-validation-latency-chart} visualizes the two full-workflow latency values from the Raspberry Pi middleware/action-endpoint validation. The chart is a validation visualization, not a statistical benchmark.
 

@@ -15,7 +15,7 @@ Figure~\ref{fig:theory-background-flow} summarizes this conceptual event-to-acti
   \label{fig:theory-background-flow}
 \end{figure}
 
-\subsection{Workflow Automation and< Orchestration}\label{subsec:workflow-automation}
+\subsection{Workflow Automation and Orchestration}\label{subsec:workflow-automation}
 
 Workflow automation concerns the coordination of tasks, decisions, and integrations through an explicit process structure. A workflow can start from an event, apply decision logic, transform data, and call external systems. Workflow automation is therefore relevant for event-action systems, where the goal is to connect an incoming event to a controlled response rather than to perform isolated computation. Workflow patterns provide a research basis for describing recurring control-flow structures such as branching, routing, and synchronization \cite{workflowPatternsAalst}.
 
@@ -35,7 +35,7 @@ REST and HTTP provide established architectural and communication concepts for n
 
 \subsection{Structured Data, JSON Contracts, and Validation}\label{subsec:json-contracts}
 
-Structured data formats reduce ambiguity between connected components. If a workflow emits free text, the receiving system must infer the intended action. If the workflow emits a structured object, the receiving system can inspect fields, allowed values, and missing data more consistently. This is why structured sensor and action messages matter in a workflow-to-action architecture.
+Structured data formats reduce ambiguity between connected components. If a workflow emits free text, the receiving system must infer the intended action. If the workflow emits a structured object, the receiving system can inspect fields, allowed values, and missing data against an explicit structure. This is why structured sensor and action messages matter in a workflow-to-action architecture.
 
 JSON Schema provides a vocabulary for describing and validating the structure of JSON data \cite{jsonSchemaDocs}. A schema can define required fields, allowed values, and whether unexpected fields are permitted. In this thesis, structured contracts describe the expected shape of sensor events and action outputs. The contracts support predictable routing and provide a basis for discussing validation. They do not by themselves create production-grade safety enforcement, but they make the expected action boundary explicit.
 
@@ -43,7 +43,7 @@ JSON Schema provides a vocabulary for describing and validating the structure of
 
 A deterministic workflow uses fixed logic to map inputs to outputs. Given the same input and the same workflow configuration, the expected decision path is the same. In the thesis scenario, the deterministic baseline uses a temperature threshold: a value at or above the threshold leads to \texttt{fan\_on}, while a lower value leads to \texttt{fan\_off}.
 
-Deterministic workflows are useful as baselines because their behavior is transparent and inspectable. The rule can be stated directly, the expected output can be defined before execution, and deviations can be identified clearly. For this thesis, the deterministic path establishes a reference point for evaluating action correctness, consistency, and latency before considering the agent-enhanced path.
+Deterministic workflows are useful as baselines because their behavior is transparent and inspectable. The rule can be stated directly, the expected output can be defined before execution, and deviations can be identified clearly. For this thesis, the deterministic path establishes a reference point for evaluating action correctness and latency observations before considering the agent-enhanced path.
 
 \subsection{Minimal Agent-Enhanced Workflows}\label{subsec:agent-enhanced-workflows}
 

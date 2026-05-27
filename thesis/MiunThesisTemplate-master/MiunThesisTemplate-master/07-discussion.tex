@@ -4,7 +4,7 @@ This chapter interprets the results from Chapter~\ref{sec:results} in relation t
 
 \subsection{Limitations of the Current Implementation}\label{subsec:discussion-limitations-current}
 
-The evaluation is limited by its scale. The system was evaluated with two defined temperature cases and one fan run, which is enough to check the implemented proof-of-concept but not enough for statistical reliability claims. The results are evidence for the defined workflow-to-action scenario rather than broad benchmarking.
+The evaluation is limited by its scale. The system was evaluated with two defined temperature cases and one recorded final run per case, which is enough to check the implemented proof-of-concept but not enough for statistical reliability claims. The results are evidence for the defined workflow-to-action scenario rather than broad benchmarking.
 
 
 The implementation also uses simulated fan actions. The results describe workflow behavior, contract-shaped action output, middleware routing, latency measurement, and split deployment behavior. They do not evaluate electrical reliability or physical actuator behavior, which would require sensor calibration, GPIO control, and hardware safety testing.
@@ -39,9 +39,9 @@ Table~\ref{tab:discussion-rq-evidence-map} summarizes how the available evidence
   \end{tabularx}
 \end{table}
 
-\subsection{Discussion of RQ1: Deterministic Workflow Accuracy and Consistency}\label{subsec:discussion-rq1-deterministic}
+\subsection{Discussion of RQ1: Deterministic Workflow Accuracy}\label{subsec:discussion-rq1-deterministic}
 
-RQ1 asks how accurately and consistently the deterministic n8n workflow produces the expected fan action across the defined temperature test cases. The deterministic baseline behaved as expected for the final high- and low-temperature cases reported in Table~\ref{tab:deterministic-results}. The high-temperature input was routed to \texttt{fan\_on}, and the low-temperature input was routed to \texttt{fan\_off}. The deterministic workflow is therefore correct within the defined evaluation scope.
+RQ1 asks how accurately the deterministic n8n workflow produces the expected fan action for the defined temperature test cases. The deterministic baseline behaved as expected for the final high- and low-temperature cases reported in Table~\ref{tab:deterministic-results}. The high-temperature input was routed to \texttt{fan\_on}, and the low-temperature input was routed to \texttt{fan\_off}. The deterministic workflow is therefore correct within the defined evaluation scope and evaluated run count.
 
 This result matters because the deterministic path is the reference point for the rest of the thesis. A threshold workflow is transparent: the rule is visible, the threshold is fixed, and the route from input value to action endpoint can be inspected. The deterministic path therefore verifies that the webhook path, workflow decision, middleware endpoints, and simulated fan responses can support the temperature-to-fan scenario before the agent-enhanced path is considered.
 
@@ -49,7 +49,7 @@ The evidence is still tied to the defined cases. The evaluation does not include
 
 \subsection{Discussion of RQ2: Agent-Enhanced Contract-Valid Output}\label{subsec:discussion-rq2-agent}
 
-RQ2 asks how accurately and consistently the minimal agent-enhanced workflow produces contract-valid action output compared with the deterministic baseline. The agent-enhanced workflow produced the expected \texttt{fan\_on} and \texttt{fan\_off} middleware actions for the same two temperature cases, as reported in Table~\ref{tab:agent-results}. The screenshot evidence also shows that the workflow produced structured action output and parsed the action before routing it to the middleware endpoint.
+RQ2 asks how accurately the minimal agent-enhanced workflow produces contract-valid action output compared with the deterministic baseline for the defined cases. The agent-enhanced workflow produced the expected \texttt{fan\_on} and \texttt{fan\_off} middleware actions for the same two temperature cases, as reported in Table~\ref{tab:agent-results}. The screenshot evidence also shows that the workflow produced structured action output and parsed the action before routing it to the middleware endpoint.
 
 The agent path is useful because it tests whether an LLM decision step can be constrained to fit the same action pipeline as the deterministic baseline. In this temperature scenario, the deterministic rule is easier to explain and is sufficient for the action choice. The agent path therefore should not be interpreted as an attempt to outperform the deterministic rule. Its role is to show that generated output can be represented as an action object with fields such as \texttt{action\_id}, \texttt{target}, \texttt{reason}, and \texttt{requires\_approval}, then parsed and routed through the same middleware boundary.
 
@@ -57,7 +57,7 @@ The agent path is useful because it tests whether an LLM decision step can be co
 This interpretation connects the thesis to work on language-model-based reasoning and action \cite{reactYao2023}. In this thesis, that idea is applied in a focused workflow setting: the agent-enhanced path receives the same temperature cases as the deterministic baseline and is expected to return contract-shaped action output. The result is therefore mainly evidence about whether an LLM decision step can be integrated into the workflow-to-action pipeline while preserving the expected action structure.
 
 
-The RQ2 evidence is based on one prompt setup, one configured model path, and the same two temperature cases used by the deterministic baseline. Within that defined setup, the agent-enhanced workflow produced structured action output for the implemented cases and routed the expected fan actions through the middleware boundary.
+The RQ2 evidence is based on one prompt setup, one configured model path, and the same two temperature cases used by the deterministic baseline. Within that defined setup, the agent-enhanced workflow produced structured action output for the implemented cases and routed the expected fan actions through the middleware boundary. Because both paths were evaluated on two straightforward temperature cases, the evidence does not show a meaningful capability difference beyond output structure and latency observations.
 
 \subsection{Discussion of RQ3: Latency, Resource, and Deployment Behavior}\label{subsec:discussion-rq3-latency-resource-deployment}
 
