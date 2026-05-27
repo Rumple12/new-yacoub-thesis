@@ -1,47 +1,80 @@
 # Final Architecture Report Figure
 
+This file documents the report-level architecture figure used in Chapter 4. The polished editable source is stored as `thesis/MiunThesisTemplate-master/MiunThesisTemplate-master/Figures/final-architecture-report.svg`, and the LaTeX build includes the exported PNG at `thesis/MiunThesisTemplate-master/MiunThesisTemplate-master/Figures/final-architecture-report.png`.
+
+The Mermaid version below mirrors the same architecture content for lightweight documentation. It is intentionally simpler than the hand-written SVG, which contains the icon-like visual styling used in the report.
+
 ```mermaid
-flowchart TD
-  A["Temperature event / test input<br/>31.4 C or 24.5 C"] --> B["PC-hosted Docker n8n<br/>n8n stays on PC"]
+flowchart LR
+  subgraph InputZone["Input / event"]
+    A["Temperature event / test input"]
+  end
 
-  B --> C["Workflow decision"]
-  C --> D1["Deterministic baseline<br/>threshold rule"]
-  C --> D2["Minimal agent-enhanced workflow<br/>structured JSON output"]
+  subgraph PC["PC-hosted workflow runtime"]
+    B["PC-hosted Docker n8n"]
+    C{"Workflow decision"}
+    D["Deterministic baseline"]
+    E["Minimal agent-enhanced workflow"]
+    B --> C
+    C --> D
+    C --> E
+  end
 
-  D1 --> E["Shared JSON contract<br/>sensor/action schemas"]
-  D2 --> E
+  subgraph BoundaryZone["Contract / validation"]
+    F["JSON contract + validation boundary"]
+  end
 
-  E --> F["Minimum safety / validation design<br/>allowed, blocked, risky cases"]
-  F --> G["Python middleware API"]
+  subgraph MW["Middleware endpoint"]
+    G["Python middleware API"]
+    H["/fan/on or /fan/off<br/>simulated fan action"]
+    G --> H
+  end
 
-  G --> H1["POST /fan/on<br/>simulated action"]
-  G --> H2["POST /fan/off<br/>simulated action"]
+  subgraph EvalZone["Evaluation artifacts"]
+    I["CSV results and metrics"]
+  end
 
-  H1 --> I["Evaluation harness + CSV results<br/>collect_metrics.py / aggregate_results.py"]
-  H2 --> I
+  subgraph PI["Raspberry Pi middleware validation"]
+    J["Raspberry Pi middleware/action endpoint"]
+    L["Validation evidence<br/>HTTP call and metrics"]
+    J --> L
+  end
 
-  B -. "HTTP over network" .-> P["Raspberry Pi Tier 1.5 validation<br/>Python middleware/action endpoint only"]
-  P --> Q["Pi evidence<br/>latency, CPU/RAM, temperature"]
+  A --> B
+  D --> F
+  E --> F
+  F --> G
+  G --> I
+  B -. "HTTP over network" .-> J
+  L -. "validation evidence" .-> I
 
-  P -.-> R["Scope limits<br/>no full n8n-on-Pi deployment<br/>no real GPIO hardware<br/>fan action remains simulated<br/>no production safety enforcement"]
+  K["Note: fan action is simulated; Raspberry Pi validation runs the middleware/action endpoint, not n8n."]
+  H -.-> K
 
-  classDef runtime fill:#eef6ff,stroke:#3b6ea8,color:#111827;
-  classDef workflow fill:#f7f7f7,stroke:#666,color:#111827;
-  classDef contract fill:#f1f8e9,stroke:#5b8c3a,color:#111827;
-  classDef safety fill:#fff4e5,stroke:#b7791f,color:#111827;
-  classDef action fill:#fff1f2,stroke:#be123c,color:#111827;
-  classDef evidence fill:#f8fafc,stroke:#475569,color:#111827;
+  classDef input fill:#ffffff,stroke:#64748b,stroke-width:1px,color:#111827;
+  classDef runtime fill:#eaf3ff,stroke:#2563eb,stroke-width:1px,color:#111827;
+  classDef decision fill:#ffffff,stroke:#64748b,stroke-width:1px,color:#111827;
+  classDef boundary fill:#fff7e6,stroke:#b26b00,stroke-width:1px,color:#111827;
+  classDef action fill:#eef7ff,stroke:#1f77b4,stroke-width:1px,color:#111827;
+  classDef evidence fill:#eef8e8,stroke:#4d7c0f,stroke-width:1px,color:#111827;
+  classDef note fill:#f8fafc,stroke:#64748b,stroke-dasharray: 4 3,color:#334155;
 
-  class B,G,P runtime;
-  class C,D1,D2 workflow;
-  class E contract;
-  class F safety;
-  class H1,H2,R action;
-  class I,Q evidence;
+  style InputZone fill:#f8fafc,stroke:#334155,stroke-width:1px;
+  style PC fill:#f8fafc,stroke:#334155,stroke-width:1px;
+  style BoundaryZone fill:#f8fafc,stroke:#334155,stroke-width:1px;
+  style MW fill:#f8fafc,stroke:#334155,stroke-width:1px;
+  style EvalZone fill:#f8fafc,stroke:#334155,stroke-width:1px;
+  style PI fill:#f8fafc,stroke:#334155,stroke-width:1px;
+
+  class A input;
+  class B,J runtime;
+  class C,D,E decision;
+  class F boundary;
+  class G,H action;
+  class I,L evidence;
+  class K note;
 ```
 
-**Caption:** Simplified report figure showing the frozen Tier 1.5 thesis architecture: PC-hosted Docker n8n, two workflow decision paths, shared JSON contracts, minimum validation, simulated middleware fan actions, CSV evaluation, and Raspberry Pi middleware-only validation.
+**Caption:** Report-level architecture of the implemented workflow-to-action system. The n8n workflow runs on the PC, action requests pass through a JSON contract and validation boundary, and the Python middleware exposes simulated fan actions. Raspberry Pi validation covers the middleware/action endpoint side over the network.
 
-This is the simplified report figure intended for use in the thesis PDF. It preserves the frozen architecture while reducing implementation detail so the figure remains readable on a page.
-
-The detailed diagram remains available as internal architecture documentation in `docs/architecture/final-architecture.md` and `docs/architecture/final-architecture.mmd`.
+The detailed implementation diagram remains available in `docs/architecture/final-architecture.md` and `docs/architecture/final-architecture.mmd` for appendix or internal evidence use.

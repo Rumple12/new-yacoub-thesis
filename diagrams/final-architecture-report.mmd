@@ -1,5 +1,5 @@
 flowchart LR
-  subgraph InputZone["Input / event"]
+  subgraph InputZone["Input / event source"]
     A["Temperature event / test input"]
   end
 
@@ -13,11 +13,11 @@ flowchart LR
     C --> E
   end
 
-  subgraph BoundaryZone["Contract / validation"]
+  subgraph BoundaryZone["Contract and validation boundary"]
     F["JSON contract + validation boundary"]
   end
 
-  subgraph MW["Middleware endpoint"]
+  subgraph MW["Middleware/action endpoint"]
     G["Python middleware API"]
     H["/fan/on or /fan/off<br/>simulated fan action"]
     G --> H
@@ -27,10 +27,8 @@ flowchart LR
     I["CSV results and metrics"]
   end
 
-  subgraph PI["Raspberry Pi middleware validation"]
+  subgraph PI["Raspberry Pi validation"]
     J["Raspberry Pi middleware/action endpoint"]
-    L["Validation evidence<br/>HTTP call and metrics"]
-    J --> L
   end
 
   A --> B
@@ -39,30 +37,30 @@ flowchart LR
   F --> G
   G --> I
   B -. "HTTP over network" .-> J
-  L -. "validation evidence" .-> I
+  J -. "validation evidence" .-> I
 
   K["Note: fan action is simulated; Raspberry Pi validation runs the middleware/action endpoint, not n8n."]
-  H -.-> K
+  H --> K
 
-  classDef input fill:#ffffff,stroke:#64748b,stroke-width:1px,color:#111827;
-  classDef runtime fill:#eaf3ff,stroke:#2563eb,stroke-width:1px,color:#111827;
-  classDef decision fill:#ffffff,stroke:#64748b,stroke-width:1px,color:#111827;
+  classDef input fill:#f7f9fc,stroke:#4b5563,stroke-width:1px,color:#111827;
+  classDef runtime fill:#eef6ff,stroke:#2563eb,stroke-width:1px,color:#111827;
+  classDef decision fill:#ffffff,stroke:#6b7280,stroke-width:1px,color:#111827;
   classDef boundary fill:#fff7e6,stroke:#b26b00,stroke-width:1px,color:#111827;
   classDef action fill:#eef7ff,stroke:#1f77b4,stroke-width:1px,color:#111827;
-  classDef evidence fill:#eef8e8,stroke:#4d7c0f,stroke-width:1px,color:#111827;
+  classDef evidence fill:#f1f8e9,stroke:#4d7c0f,stroke-width:1px,color:#111827;
   classDef note fill:#f8fafc,stroke:#64748b,stroke-dasharray: 4 3,color:#334155;
 
-  style InputZone fill:#f8fafc,stroke:#334155,stroke-width:1px;
-  style PC fill:#f8fafc,stroke:#334155,stroke-width:1px;
-  style BoundaryZone fill:#f8fafc,stroke:#334155,stroke-width:1px;
-  style MW fill:#f8fafc,stroke:#334155,stroke-width:1px;
-  style EvalZone fill:#f8fafc,stroke:#334155,stroke-width:1px;
-  style PI fill:#f8fafc,stroke:#334155,stroke-width:1px;
+  style InputZone fill:#f7f9fc,stroke:#344054,stroke-width:1px;
+  style PC fill:#f7f9fc,stroke:#344054,stroke-width:1px;
+  style BoundaryZone fill:#f7f9fc,stroke:#344054,stroke-width:1px;
+  style MW fill:#f7f9fc,stroke:#344054,stroke-width:1px;
+  style EvalZone fill:#f7f9fc,stroke:#344054,stroke-width:1px;
+  style PI fill:#f7f9fc,stroke:#344054,stroke-width:1px;
 
   class A input;
-  class B,J runtime;
-  class C,D,E decision;
+  class B,D,E,J runtime;
+  class C decision;
   class F boundary;
   class G,H action;
-  class I,L evidence;
+  class I evidence;
   class K note;
