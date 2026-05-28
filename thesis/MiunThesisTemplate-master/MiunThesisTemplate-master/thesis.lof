@@ -7,4 +7,8 @@
 \contentsline {figure}{\numberline {6}{\ignorespaces Minimal agent-enhanced n8n workflow canvas.}}{25}{figure.caption.15}%
 \contentsline {figure}{\numberline {7}{\ignorespaces Raspberry Pi middleware/action-endpoint validation latency.}}{34}{figure.caption.22}%
 \contentsline {figure}{\numberline {8}{\ignorespaces Raspberry Pi middleware/action-endpoint validation output for the high-temperature fan-on case.}}{35}{figure.caption.24}%
-\contentsline {figure}{\numberline {9}{\ignorespaces Local n8n runtime verification at localhost port 5678.}}{2}{figure.caption.27}%
+\contentsline {figure}{\numberline {9}{\ignorespaces Local n8n runtime verification at localhost port 5678.}}{4}{figure.caption.32}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Detailed architecture diagram preserved as supporting evidence.}}{5}{figure.caption.33}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Raspberry Pi middleware CPU and RAM observation.}}{5}{figure.caption.34}%
+\contentsline {figure}{\numberline {12}{\ignorespaces Raspberry Pi terminal evidence for the high-temperature fan-on case.}}{5}{figure.caption.35}%
+\contentsline {figure}{\numberline {13}{\ignorespaces Raspberry Pi terminal evidence for the low-temperature fan-off case.}}{6}{figure.caption.36}%

@@ -1,50 +1,137 @@
 \section{Source Code and Artifacts}\label{sec:appendix-source-code}
-% Appendix A purpose: point to repository source code, final artifacts, workflow exports, screenshots, and result files.
-% Course/template source: the MIUN template says source code should generally be linked from the appendix rather than printed in full.
-% Source repository: Rumple12/new-yacoub-thesis.
-% Main artifact groups:
-% - infrastructure/
-% - middleware/
-% - shared_interfaces/
-% - cognitive_logic/
-% - safety_layer/
-% - evaluation/
-% - scripts/
-% - docs/report-notes/
 
-\subsection{Repository Reference}\label{subsec:appendix-repository}
-% What to include: GitHub URL, final commit hash or release tag, and note that source code is provided in the repository.
+This appendix lists the main source-code files, workflow exports, evaluation files, and supporting evidence used in the thesis. The full project repository is available at:
 
-\subsection{Main Repository Artifact Paths}\label{subsec:appendix-artifact-paths}
+\begin{quote}
+\url{https://github.com/Rumple12/new-yacoub-thesis}
+\end{quote}
 
-The main implementation and report-support artifacts are available in the project repository. Key source paths are:
+The appendix does not reproduce source code in full. Instead, it points to the repository artifacts needed to inspect, repeat, or extend the work.
 
-\begin{itemize}
-    \item \path{infrastructure/docker/docker-compose.yml} - Docker Compose configuration for the local n8n runtime.
-    \item \path{middleware/api/routes.py} - middleware HTTP route handling.
-    \item \path{middleware/gpio/mock_sensor.py} - simulated sensor and fan state.
-    \item \path{shared_interfaces/json-schema/sensor-event.schema.json} - sensor event schema.
-    \item \path{shared_interfaces/json-schema/agent-action.schema.json} - shared action schema.
-    \item \path{shared_interfaces/examples/} - example sensor and action payloads.
-    \item \path{cognitive_logic/workflows/deterministic-baseline.md} - deterministic workflow description.
-    \item \path{cognitive_logic/workflows/deterministic-baseline.json} - deterministic workflow export.
-    \item \path{cognitive_logic/workflows/agent-minimal.md} - minimal agent-enhanced workflow description.
-    \item \path{cognitive_logic/workflows/agent-minimal.json} - minimal agent-enhanced workflow export.
-    \item \path{cognitive_logic/prompts/system-prompt-v1.md} - prompt used by the minimal agent-enhanced workflow.
-    \item \path{cognitive_logic/memory/memory-choice-v1.md} - documented memory choice for the agent-enhanced workflow.
-    \item \path{safety_layer/policies/action-policy-v1.md} - documented action policy.
-    \item \path{safety_layer/parsers/output-validation-v1.md} - output validation design.
-    \item \path{safety_layer/approvals/hitl-v1.md} - human-in-the-loop approval design.
-    \item \path{safety_layer/examples/} - allowed, blocked, and risky validation examples.
-    \item \path{docs/architecture/final-architecture-report.mmd} - report-level architecture diagram source.
-    \item \path{docs/architecture/final-architecture-report.md} - report-level architecture diagram notes.
-    \item \path{docs/architecture/theory-background-flow.mmd} - Chapter 2 conceptual diagram source.
-    \item \path{docs/architecture/theory-background-flow.md} - Chapter 2 conceptual diagram notes.
-\end{itemize}
+\subsection{Implementation Files}\label{subsec:appendix-implementation-files}
 
-\subsection{Local n8n Runtime Evidence}\label{subsec:appendix-n8n-runtime-evidence}
+The main implementation files are listed below.
 
-The local n8n runtime was verified by starting the Docker Compose setup and opening n8n at localhost port 5678. Figure~\ref{fig:appendix-n8n-runtime-proof} shows the n8n owner account setup page, which confirms that the local runtime was reachable in the browser.
+\begin{table}[H]
+  \centering
+  \small
+  \renewcommand{\arraystretch}{1.15}
+  \caption{Main implementation artifacts.}
+  \label{tab:appendix-implementation-artifacts}
+  \begin{tabularx}{\textwidth}{@{}L{0.42\textwidth}Y@{}}
+    \toprule
+    Path & Purpose \\
+    \midrule
+    \path{infrastructure/docker/docker-compose.yml} & Docker Compose setup for the local n8n runtime. \\
+    \path{middleware/api/routes.py} & Python middleware HTTP routes for status and simulated fan actions. \\
+    \path{middleware/gpio/mock_sensor.py} & Simulated sensor and fan-state logic. \\
+    \path{scripts/collect_metrics.py} & Script used to collect workflow result rows. \\
+    \path{scripts/aggregate_results.py} & Script used to regenerate processed result summaries. \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\subsection{Workflow, Prompt, and Contract Artifacts}\label{subsec:appendix-workflow-contract-artifacts}
+
+The workflow exports, prompt files, and shared contracts are listed below.
+
+\begin{table}[H]
+  \centering
+  \small
+  \renewcommand{\arraystretch}{1.15}
+  \caption{Workflow, prompt, and contract artifacts.}
+  \label{tab:appendix-workflow-contract-artifacts}
+  \begin{tabularx}{\textwidth}{@{}L{0.42\textwidth}Y@{}}
+    \toprule
+    Path & Purpose \\
+    \midrule
+    \path{cognitive_logic/workflows/deterministic-baseline.json} & Exported deterministic baseline n8n workflow. \\
+    \path{cognitive_logic/workflows/deterministic-baseline.md} & Description of the deterministic workflow. \\
+    \path{cognitive_logic/workflows/agent-minimal.json} & Exported agent-enhanced n8n workflow. \\
+    \path{cognitive_logic/workflows/agent-minimal.md} & Description of the agent-enhanced workflow. \\
+    \path{cognitive_logic/prompts/system-prompt-v1.md} & Prompt used by the agent-enhanced workflow. \\
+    \path{cognitive_logic/memory/memory-choice-v1.md} & Documented memory choice for the agent-enhanced workflow. \\
+    \path{shared_interfaces/json-schema/sensor-event.schema.json} & JSON schema for sensor-style temperature events. \\
+    \path{shared_interfaces/json-schema/agent-action.schema.json} & JSON schema for contract-shaped action output. \\
+    \path{shared_interfaces/examples/} & Example sensor and action payloads. \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\subsection{Safety and Validation Artifacts}\label{subsec:appendix-safety-validation-artifacts}
+
+The validation and safety-layer documents are listed below. These files define the documented validation cases used in the report.
+
+\begin{table}[H]
+  \centering
+  \small
+  \renewcommand{\arraystretch}{1.15}
+  \caption{Safety and validation artifacts.}
+  \label{tab:appendix-safety-validation-artifacts}
+  \begin{tabularx}{\textwidth}{@{}L{0.42\textwidth}Y@{}}
+    \toprule
+    Path & Purpose \\
+    \midrule
+    \path{safety_layer/policies/action-policy-v1.md} & Action policy for allowed and unsupported action outputs. \\
+    \path{safety_layer/parsers/output-validation-v1.md} & Documented parser and validation design. \\
+    \path{safety_layer/approvals/hitl-v1.md} & Human-in-the-loop approval design. \\
+    \path{safety_layer/examples/} & Allowed, blocked, and risky validation examples. \\
+    \path{evaluation/datasets/test-cases.json} & Defined workflow and safety test cases. \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\subsection{Evaluation Result Files}\label{subsec:appendix-evaluation-artifacts}
+
+The main raw and processed result files used in the report are listed below.
+
+\begin{table}[H]
+  \centering
+  \small
+  \renewcommand{\arraystretch}{1.15}
+  \caption{Evaluation result artifacts.}
+  \label{tab:appendix-evaluation-artifacts}
+  \begin{tabularx}{\textwidth}{@{}L{0.42\textwidth}Y@{}}
+    \toprule
+    Path & Purpose \\
+    \midrule
+    \path{evaluation/results/raw/run_20260429T165733Z_deterministic.csv} & Final deterministic workflow result rows. \\
+    \path{evaluation/results/raw/run_20260429T165859Z_agent.csv} & Final agent-enhanced workflow result rows. \\
+    \path{evaluation/results/raw/dump/run_20260429T165702Z_deterministic.csv} & Non-final setup evidence from an earlier HTTP 404 webhook attempt. \\
+    \path{evaluation/results/processed/summary_latency.csv} & Processed latency summary. \\
+    \path{evaluation/results/processed/summary_resources.csv} & Processed resource summary. \\
+    \path{evaluation/results/processed/baseline_vs_agent.csv} & Processed deterministic-versus-agent summary. \\
+    \path{evaluation/results/processed/safety_outcomes.csv} & Safety outcome summary file; header only in the final evidence. \\
+    \path{evaluation/results/pi-validation/pi-workflow-run-final.csv} & Raspberry Pi middleware/action-endpoint validation rows. \\
+    \path{evaluation/results/pi-validation/pi-validation-notes.md} & Raspberry Pi validation notes. \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\subsection{Figure and Screenshot Evidence}\label{subsec:appendix-figure-screenshot-evidence}
+
+The main report uses selected diagrams and screenshots. Additional raw screenshots and supporting evidence are kept in the repository instead of being reproduced throughout the report.
+
+\begin{table}[H]
+  \centering
+  \small
+  \renewcommand{\arraystretch}{1.15}
+  \caption{Figure and screenshot evidence locations.}
+  \label{tab:appendix-figure-screenshot-evidence}
+  \begin{tabularx}{\textwidth}{@{}L{0.42\textwidth}Y@{}}
+    \toprule
+    Path & Purpose \\
+    \midrule
+    \path{thesis/MiunThesisTemplate-master/MiunThesisTemplate-master/Figures/} & Figures and screenshots included in the thesis. \\
+    \path{docs/architecture/} & Mermaid sources and notes for architecture and theory diagrams. \\
+    \path{cognitive_logic/workflows/evidence/step-06/} & Deterministic workflow screenshot evidence. \\
+    \path{cognitive_logic/workflows/evidence/step-07/} & Agent-enhanced workflow screenshot evidence. \\
+    \path{evaluation/results/pi-validation/} & Raspberry Pi validation screenshots, notes, and CSV evidence. \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+Figure~\ref{fig:appendix-n8n-runtime-proof} shows one example of local runtime evidence. Other raw screenshots are listed by folder above rather than inserted individually.
 
 \begin{figure}[H]
     \centering
@@ -53,36 +140,38 @@ The local n8n runtime was verified by starting the Docker Compose setup and open
     \label{fig:appendix-n8n-runtime-proof}
 \end{figure}
 
-\subsection{Workflow and Screenshot Evidence}\label{subsec:appendix-workflow-evidence}
-% What to include: paths to additional workflow screenshots not used in the main report.
-% Sources: cognitive_logic/workflows/evidence/step-06/ style files and cognitive_logic/workflows/evidence/step-07/.
+Figure~\ref{fig:appendix-detailed-final-architecture} shows the detailed architecture diagram kept as supporting evidence.
 
-Additional workflow screenshot evidence is stored under:
+\begin{figure}[H]
+    \centering
+    \makebox[\textwidth][c]{%
+        \includegraphics[width=1.08\textwidth]{Figures/appendix-detailed-final-architecture.png}%
+    }
+    \caption{Detailed architecture diagram preserved as supporting evidence.}
+    \label{fig:appendix-detailed-final-architecture}
+\end{figure}
 
-\begin{itemize}
-    \item \path{cognitive_logic/workflows/evidence/step-06/} - deterministic baseline workflow evidence.
-    \item \path{cognitive_logic/workflows/evidence/step-07/} - minimal agent-enhanced workflow evidence.
-    \item \path{evaluation/results/pi-validation/} - Raspberry Pi middleware/action-endpoint validation screenshots and notes.
-\end{itemize}
+Figure~\ref{fig:appendix-pi-middleware-cpu-ram} shows the Raspberry Pi middleware CPU and RAM observation used as supporting resource evidence.
 
-\subsection{Evaluation Artifacts}\label{subsec:appendix-evaluation-artifacts}
-% What to include: raw/processed CSV paths, Pi validation CSVs, and notes explaining non-final setup files that should not be used as final evidence.
-% Sources: evaluation/results/raw/, evaluation/results/processed/, evaluation/results/pi-validation/.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{Figures/appendix-pi-middleware-cpu-ram.png}
+    \caption{Raspberry Pi middleware CPU and RAM observation.}
+    \label{fig:appendix-pi-middleware-cpu-ram}
+\end{figure}
 
-The full raw and processed CSV files are available in the project repository. The main files used for the report are:
+Figures~\ref{fig:appendix-pi-terminal-high-temp-fan-on} and~\ref{fig:appendix-pi-terminal-low-temp-fan-off} show terminal evidence for the Raspberry Pi high- and low-temperature validation cases.
 
-\begin{itemize}
-    \item \path{evaluation/datasets/test-cases.json} - defined workflow and safety test cases.
-    \item \path{evaluation/metrics/metrics-schema.md} - evaluation metric fields.
-    \item \path{scripts/collect_metrics.py} - collection script for workflow test runs.
-    \item \path{scripts/aggregate_results.py} - aggregation script for processed summaries.
-    \item \path{evaluation/results/raw/run_20260429T165733Z_deterministic.csv} - final deterministic workflow rows.
-    \item \path{evaluation/results/raw/run_20260429T165859Z_agent.csv} - final agent-enhanced workflow rows.
-    \item \path{evaluation/results/raw/dump/run_20260429T165702Z_deterministic.csv} - non-final HTTP 404 webhook setup evidence.
-    \item \path{evaluation/results/processed/summary_latency.csv} - processed latency summary.
-    \item \path{evaluation/results/processed/summary_resources.csv} - processed resource summary.
-    \item \path{evaluation/results/processed/baseline_vs_agent.csv} - processed baseline-versus-agent summary.
-    \item \path{evaluation/results/processed/safety_outcomes.csv} - safety outcome summary file.
-    \item \path{evaluation/results/pi-validation/pi-workflow-run-final.csv} - Raspberry Pi middleware/action-endpoint validation rows.
-    \item \path{evaluation/results/pi-validation/pi-validation-notes.md} - Raspberry Pi validation notes.
-\end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{Figures/appendix-pi-terminal-high-temp-fan-on.png}
+    \caption{Raspberry Pi terminal evidence for the high-temperature fan-on case.}
+    \label{fig:appendix-pi-terminal-high-temp-fan-on}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{Figures/appendix-pi-terminal-low-temp-fan-off.png}
+    \caption{Raspberry Pi terminal evidence for the low-temperature fan-off case.}
+    \label{fig:appendix-pi-terminal-low-temp-fan-off}
+\end{figure}

@@ -1,7 +1,5 @@
 # new-yacoub-thesis
 
-For the full development/report process, see: [docs/plans/new-yacoub-14-step-process.md](docs/plans/new-yacoub-14-step-process.md)
-
 ## What this repository is
 
 This repository contains the implementation, planning documents, and report-support material for the **new-yacoub** bachelor thesis plan.
@@ -183,60 +181,7 @@ Use this order when making decisions:
 2. `docs/ongoing/yacoub-scope.md`
 3. `docs/ongoing/integration-contract.md`
 4. `docs/decisions.md`
-5. historical/reference plan files under `docs/plans/`
-
-Important:
-
-- `docs/plans/obid-project-plan.md` is **reference-only**
-- `docs/plans/supervisor-brief.md` must be interpreted through the narrowed new-yacoub scope
-
----
-
-## How Antigravity should treat this repo
-
-Antigravity is the **main IDE and planning environment** for this repository.
-
-It should:
-
-- prioritize Yacoub-complete over Obid-complete
-- keep the scope locked to the new-yacoub plan
-- prefer one complete vertical slice over many partial systems
-- update planning/specification files before broad implementation when things are unclear
-
-Antigravity should **not**:
-
-- expand the repo back into the original broader Yacoub/Obid plan
-- introduce broad multi-agent design
-- modify n8n core unless explicitly required
-- introduce MCP in phase 0
-
-Relevant workspace controls live in:
-
-- `.agents/rules/`
-- `.agents/workflows/`
-- `.agents/skills/`
-
----
-
-## How Codex should treat this repo
-
-Codex is a **reviewer/fixer** for this repository, not the main planner.
-
-Use Codex for:
-
-- audit/review of scope and diffs
-- spotting schema drift
-- checking missing tests/metrics
-- making small targeted repairs
-
-Keep Codex behavior narrow:
-
-- `audit-review` thread = critique and inspection only
-- `repair-fix` thread = bounded fixes only
-
-Codex should not silently redesign the thesis architecture.
-
----
+5. active planning and reference files under `docs/plans/`
 
 ## Working style
 
@@ -269,7 +214,7 @@ Use:
 - one feature = one branch
 - one clean checkpoint = one commit
 
-Do not batch many unrelated AI-generated changes into one commit.
+Do not batch many unrelated changes into one commit.
 
 ---
 

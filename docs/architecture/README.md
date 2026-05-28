@@ -137,7 +137,7 @@ Purpose:
 - lock the narrowed scope
 - document architecture decisions
 - support report writing
-- keep AI tools aligned with thesis boundaries
+- keep documentation aligned with thesis boundaries
 
 ## Contract boundary
 
