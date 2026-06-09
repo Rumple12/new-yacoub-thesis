@@ -17,6 +17,9 @@ from middleware.gpio.mock_sensor import (
 from middleware.webhooks.n8n_sender import send_sensor_event
 
 
+
+
+
 class MiddlewareRequestHandler(BaseHTTPRequestHandler):
     server_version = "NewYacoubMiddleware/0.1"
 
@@ -84,6 +87,9 @@ class MiddlewareRequestHandler(BaseHTTPRequestHandler):
             },
         )
 
+
+
+
     def _read_json_body(self) -> dict[str, Any] | None:
         length = int(self.headers.get("Content-Length", "0"))
         raw_body = self.rfile.read(length) if length else b"{}"
@@ -94,6 +100,8 @@ class MiddlewareRequestHandler(BaseHTTPRequestHandler):
             return None
 
         return payload if isinstance(payload, dict) else None
+
+
 
     def _send_json(self, status: HTTPStatus, payload: dict[str, Any]) -> None:
         body = json.dumps(payload, indent=2).encode("utf-8")

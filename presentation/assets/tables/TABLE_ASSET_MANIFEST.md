@@ -1,0 +1,11 @@
+# Table Asset Manifest
+
+| Target image | Source table caption | Source file | Intended slide | Status | Notes |
+|---|---|---|---|---|---|
+| table-defined-test-cases.png | Defined workflow test cases. | thesis/MiunThesisTemplate-master/MiunThesisTemplate-master/03-method.tex | Slide 7 or Slide 12 | Created | Simplified labels for presentation readability. |
+| table-local-results.png | Deterministic baseline results.; Agent-enhanced workflow results. | thesis/MiunThesisTemplate-master/MiunThesisTemplate-master/06-result.tex | Slide 13 - Local results | Created | Combined local deterministic and agent rows; single-run proof-of-concept latency observations. |
+| table-final-latency-summary.png | Final workflow latency summary. | thesis/MiunThesisTemplate-master/MiunThesisTemplate-master/06-result.tex | Slide 13 or as backup evidence | Created | Single-run proof-of-concept latency observations; Pi validation used Pi-hosted middleware/action endpoint with PC-hosted n8n. |
+| table-pi-validation.png | Raspberry Pi middleware/action-endpoint full-workflow validation. | thesis/MiunThesisTemplate-master/MiunThesisTemplate-master/06-result.tex | Slide 14 - Raspberry Pi validation | Created | Pi validation used Pi-hosted middleware/action endpoint with PC-hosted n8n; not full n8n on Raspberry Pi. |
+| table-pi-supporting-observations.png | Supporting Raspberry Pi middleware observations. | thesis/MiunThesisTemplate-master/MiunThesisTemplate-master/06-result.tex | Backup slide or Slide 14 if there is space | Created | Supporting observations; direct endpoint latency is not full workflow latency. |
+| table-safety-validation-design.png | Documented safety and validation cases from Step 8. | thesis/MiunThesisTemplate-master/MiunThesisTemplate-master/06-result.tex | Slide 11 - Contracts and safety design | Created | Documented validation design, not full runtime enforcement. |
+| table-rq-evidence-map.png | Mapping between research questions, evidence, results, and interpretation. | thesis/MiunThesisTemplate-master/MiunThesisTemplate-master/07-discussion.tex | Slide 15 or backup defense slide | Created | RQ3 describes PC-hosted n8n calling Pi-hosted middleware, not full n8n on Raspberry Pi. |

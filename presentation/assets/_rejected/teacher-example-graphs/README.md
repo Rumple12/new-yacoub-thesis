@@ -1,0 +1,1 @@
+These graph files were copied because their filenames matched graph1.png, graph2.png, and graph3.png, but they appear to be generic teacher/example graph images rather than actual thesis evaluation results. They should not be used in the final thesis presentation.
