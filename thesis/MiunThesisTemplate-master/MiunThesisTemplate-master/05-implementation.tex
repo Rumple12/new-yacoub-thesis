@@ -82,6 +82,8 @@ The rule is intentionally simple:
 if temperature \(\geq 30.0\) C, request \texttt{fan\_on}; otherwise, request \texttt{fan\_off}.
 \end{quote}
 
+The value \texttt{30.0 C} is the decision threshold used by the deterministic workflow. The evaluation values \texttt{31.4 C} and \texttt{24.5 C} are not additional thresholds; they are the two selected test inputs used to exercise the two branches of this rule. The high-temperature input \texttt{31.4 C} is above the threshold and is expected to route to \texttt{fan\_on}, while the low-temperature input \texttt{24.5 C} is below the threshold and is expected to route to \texttt{fan\_off}.
+
 When the temperature is at or above the threshold, the workflow creates an action object corresponding to \texttt{fan\_on} and calls the local \texttt{POST /fan/on} endpoint. When the temperature is below the threshold, it creates an action object corresponding to \texttt{fan\_off} and calls the local \texttt{POST /fan/off} endpoint. The host-Docker bridge address is used because n8n runs inside Docker while the middleware runs on the host during local PC execution.
 
 The deterministic workflow exists for two reasons. First, it provides a predictable reference behavior for the same temperature-to-fan task used by the agent-enhanced workflow. Second, it gives the evaluation a simple baseline against which action correctness and latency observations can be compared. The baseline does not use prompts, memory, model calls, safety approval nodes, GPIO, or Raspberry Pi deployment.
@@ -91,7 +93,7 @@ The deterministic n8n workflow canvas is shown in Figure~\ref{fig:deterministic-
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{Figures/deterministic-baseline-canvas.png}
-  \caption{Deterministic baseline n8n workflow canvas.}
+  \caption{Deterministic baseline n8n workflow canvas. The IF node label shows the fixed decision threshold, \texttt{Temp} \(\geq\) \texttt{30.0 C}; the evaluated inputs \texttt{31.4 C} and \texttt{24.5 C} are test cases chosen above and below this threshold.}
   \label{fig:deterministic-workflow-canvas}
 \end{figure}
 

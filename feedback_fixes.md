@@ -5,8 +5,9 @@ Source: `C:/Users/Jake_/Downloads/yada2100_feedback.docx`
 ## 1. Questions
 
 - [x] (fixed) 5.1. Kan du förklara vad du menar med att "...the workflow selects either the deterministic or agent-enhanced path...".
-- [ ] Fig. 5 (sid. 24). Här står det "Temp >= 30.0 C", men på andra ställen står det fläkt på vid 31,4 och fläkt av vid 24,5. Hur kommer det sig?
-- [ ] Tabell 3, 4 och 8. Med tanke på hur systemet är uppbyggt och testerna gjorda är nyttan av 6-7 värdesiffror oklar; 2-3 värdesiffror borde räcka. Hur många test gjordes?
+- [x] (fixed) Fig. 5 (sid. 24). Här står det "Temp >= 30.0 C", men på andra ställen står det fläkt på vid 31,4 och fläkt av vid 24,5. Hur kommer det sig?
+- [x] (fixed) Tabell 3, 4 och 8: reduce unnecessary decimal precision and clarify number of tests / single-run latency observations.
+  - Note: Latency values are now rounded to approximately 2-3 significant figures. The Results overview now states that the reported latency values are single-run observations from the final successful run per defined case, not repeated-trial averages, and no standard deviation is reported.
 - [ ] Tabell 7. Om tabell 8 visualiseras med en graf bör även informationen från tabell 3 och 4 övervägas.
 - [ ] Hur har "contract-valid" faktiskt verifierats i runtime? Rapporten skiljer mellan kontraktsformad output och faktisk validering, men säkerhets-/valideringsdelen verkar snarare vara dokumenterad design än implementerad och mätt runtime-validering.
 

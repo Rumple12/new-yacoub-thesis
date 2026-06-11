@@ -4,13 +4,15 @@ This chapter reports the observed results from the defined proof-of-concept. The
 
 \subsection{Overview of Evaluated System}\label{subsec:results-overview}
 
-The results cover the evaluated workflow modes, documented validation cases, CSV outputs, and Raspberry Pi middleware validation. The local workflow tests used the same two temperature cases defined in the evaluation dataset: a high-temperature case of \texttt{31.4 C}, expected to produce \texttt{fan\_on}, and a low-temperature case of \texttt{24.5 C}, expected to produce \texttt{fan\_off}.
+The results cover the evaluated workflow modes, documented validation cases, CSV outputs, and Raspberry Pi middleware validation. The local workflow tests used the same two temperature cases defined in the evaluation dataset. These values were chosen on opposite sides of the deterministic threshold of \texttt{30.0 C}: the high-temperature case \texttt{31.4 C} is above the threshold and is expected to produce \texttt{fan\_on}, while the low-temperature case \texttt{24.5 C} is below the threshold and is expected to produce \texttt{fan\_off}.
+
+The reported latency values are single-run observations from the final successful run for each defined case. They are used to show that the workflow-to-action path was measurable in the implemented proof-of-concept, not to provide a statistical benchmark. Since the evaluation did not include repeated latency trials per case, no standard deviation is reported. For this reason, latency values in the result tables are rounded to approximately two or three significant figures.
 
 The local workflow results are recorded in raw CSV files, and the processed summaries are stored in the processed result files. Raspberry Pi validation evidence is stored with the Raspberry Pi result artifacts. Full repository paths for these evidence files are listed in Appendix~\ref{sec:appendix-source-code}. Additional screenshots and raw validation evidence are listed in Appendix~\ref{sec:appendix-source-code}.
 
 \subsection{Deterministic Baseline Results}\label{subsec:results-deterministic}
 
-The deterministic baseline applies the fixed threshold rule documented in the workflow evidence: temperatures greater than or equal to \texttt{30.0 C} are routed to \texttt{fan\_on}, and lower temperatures are routed to \texttt{fan\_off}. The Step 6 runtime verification notes report that both required branches were verified locally through the n8n test webhook. The final raw deterministic CSV contains one successful row for each defined deterministic test case. Table~\ref{tab:deterministic-results} summarizes the deterministic baseline results for the two defined temperature cases. The source file is listed in Appendix~\ref{sec:appendix-source-code}.
+The deterministic baseline applies the fixed threshold rule documented in the workflow evidence: temperatures greater than or equal to \texttt{30.0 C} are routed to \texttt{fan\_on}, and lower temperatures are routed to \texttt{fan\_off}. The reported input values \texttt{31.4 C} and \texttt{24.5 C} are therefore branch-test inputs, not alternative threshold values. The Step 6 runtime verification notes report that both required branches were verified locally through the n8n test webhook. The final raw deterministic CSV contains one successful row for each defined deterministic test case. Table~\ref{tab:deterministic-results} summarizes the deterministic baseline results for the two defined temperature cases. The source file is listed in Appendix~\ref{sec:appendix-source-code}.
 
 \begin{table}[H]
   \centering
@@ -20,15 +22,15 @@ The deterministic baseline applies the fixed threshold rule documented in the wo
   \renewcommand{\arraystretch}{1.15}
   \begin{tabularx}{\textwidth}{@{}L{0.30\textwidth}L{0.10\textwidth}L{0.14\textwidth}L{0.14\textwidth}L{0.08\textwidth}Y@{}}
     \toprule
-    Test case & Input (C) & Expected & Observed & HTTP & Latency (ms) \\
+    Test case & Input (C) & Expected & Observed & HTTP & Approx. latency (ms) \\
     \midrule
-    \codepath{deterministic\_high\_temp} & 31.4 & \texttt{fan\_on} & \texttt{fan\_on} & 200 & 480.398 \\
-    \codepath{deterministic\_low\_temp} & 24.5 & \texttt{fan\_off} & \texttt{fan\_off} & 200 & 176.778 \\
+    \codepath{deterministic\_high\_temp} & 31.4 & \texttt{fan\_on} & \texttt{fan\_on} & 200 & 480 \\
+    \codepath{deterministic\_low\_temp} & 24.5 & \texttt{fan\_off} & \texttt{fan\_off} & 200 & 177 \\
     \bottomrule
   \end{tabularx}
 \end{table}
 
-Both deterministic CSV rows have \texttt{success=true}. The observed middleware responses also identify the fan action as simulated. For the high-temperature case, the response contains \texttt{action=fan\_on} and \texttt{fan=on}. For the low-temperature case, the response contains \texttt{action=fan\_off} and \texttt{fan=off}. These rows are the final successful deterministic raw result rows. A previous deterministic production-webhook setup attempt returned HTTP \texttt{404}; that file is treated as setup evidence rather than final action-correctness evidence.
+Both deterministic CSV rows have \texttt{success=true}. The observed middleware responses also identify the fan action as simulated. For the high-temperature case, the response contains \texttt{action=fan\_on} and \texttt{fan=on}. For the low-temperature case, the response contains \texttt{action=fan\_off} and \texttt{fan=off}. These rows are the final successful deterministic raw result rows. Each latency value in Table~\ref{tab:deterministic-results} represents one final successful run for the corresponding deterministic test case. A previous deterministic production-webhook setup attempt returned HTTP \texttt{404}; that file is treated as setup evidence rather than final action-correctness evidence.
 
 \subsection{Agent-Enhanced Workflow Results}\label{subsec:results-agent}
 
@@ -44,15 +46,15 @@ For the high-temperature case, the evidence reports that the agent selected \tex
   \renewcommand{\arraystretch}{1.15}
   \begin{tabularx}{\textwidth}{@{}L{0.26\textwidth}L{0.10\textwidth}L{0.14\textwidth}L{0.14\textwidth}L{0.08\textwidth}Y@{}}
     \toprule
-    Test case & Input (C) & Expected & Observed & HTTP & Latency (ms) \\
+    Test case & Input (C) & Expected & Observed & HTTP & Approx. latency (ms) \\
     \midrule
-    \codepath{agent\_high\_temp} & 31.4 & \texttt{fan\_on} & \texttt{fan\_on} & 200 & 2668.036 \\
-    \codepath{agent\_low\_temp} & 24.5 & \texttt{fan\_off} & \texttt{fan\_off} & 200 & 1995.094 \\
+    \codepath{agent\_high\_temp} & 31.4 & \texttt{fan\_on} & \texttt{fan\_on} & 200 & 2{,}670 \\
+    \codepath{agent\_low\_temp} & 24.5 & \texttt{fan\_off} & \texttt{fan\_off} & 200 & 2{,}000 \\
     \bottomrule
   \end{tabularx}
 \end{table}
 
-Both agent CSV rows have \texttt{success=true}. The CSV file records the final observed middleware action, while the screenshot evidence records the structured agent output and parsed action routing. Together, the evidence supports the claim that the agent workflow produced contract-shaped \texttt{fan\_on} and \texttt{fan\_off} actions for the defined cases. The evidence is limited to this workflow setup and is not a model comparison or multi-agent evaluation.
+Both agent CSV rows have \texttt{success=true}. The CSV file records the final observed middleware action, while the screenshot evidence records the structured agent output and parsed action routing. Each latency value in Table~\ref{tab:agent-results} represents one final successful run for the corresponding agent-enhanced test case. Together, the evidence supports the claim that the agent workflow produced contract-shaped \texttt{fan\_on} and \texttt{fan\_off} actions for the defined cases. The evidence is limited to this workflow setup and is not a model comparison or multi-agent evaluation.
 
 \subsection{Safety and Validation Case Results}\label{subsec:results-contract-safety}
 
@@ -129,14 +131,14 @@ Table~\ref{tab:final-workflow-latency-summary} summarizes the final full-workflo
   \label{tab:final-workflow-latency-summary}
   \begin{tabularx}{\textwidth}{@{}L{0.24\textwidth}L{0.18\textwidth}L{0.10\textwidth}L{0.13\textwidth}L{0.10\textwidth}Y@{}}
     \toprule
-    Source & Test case & Input (C) & Observed & Success & Latency (ms) \\
+    Source & Test case & Input (C) & Observed & Success & Approx. latency (ms) \\
     \midrule
-    Local deterministic & High temperature & 31.4 & \texttt{fan\_on} & \texttt{true} & 480.398 \\
-    Local deterministic & Low temperature & 24.5 & \texttt{fan\_off} & \texttt{true} & 176.778 \\
-    Local agent & High temperature & 31.4 & \texttt{fan\_on} & \texttt{true} & 2668.036 \\
-    Local agent & Low temperature & 24.5 & \texttt{fan\_off} & \texttt{true} & 1995.094 \\
-    Raspberry Pi validation & High temperature & 31.4 & \texttt{fan\_on} & \texttt{true} & 437.003 \\
-    Raspberry Pi validation & Low temperature & 24.5 & \texttt{fan\_off} & \texttt{true} & 200.206 \\
+    Local deterministic & High temperature & 31.4 & \texttt{fan\_on} & \texttt{true} & 480 \\
+    Local deterministic & Low temperature & 24.5 & \texttt{fan\_off} & \texttt{true} & 177 \\
+    Local agent & High temperature & 31.4 & \texttt{fan\_on} & \texttt{true} & 2{,}670 \\
+    Local agent & Low temperature & 24.5 & \texttt{fan\_off} & \texttt{true} & 2{,}000 \\
+    Raspberry Pi validation & High temperature & 31.4 & \texttt{fan\_on} & \texttt{true} & 437 \\
+    Raspberry Pi validation & Low temperature & 24.5 & \texttt{fan\_off} & \texttt{true} & 200 \\
     \bottomrule
   \end{tabularx}
 \end{table}
@@ -157,15 +159,15 @@ The main full-workflow Pi validation evidence is stored in the Raspberry Pi vali
   \label{tab:pi-full-workflow-results}
   \begin{tabularx}{\textwidth}{@{}L{0.30\textwidth}L{0.10\textwidth}L{0.14\textwidth}L{0.14\textwidth}L{0.08\textwidth}Y@{}}
     \toprule
-    Test case & Input (C) & Expected & Observed & HTTP & Latency (ms) \\
+    Test case & Input (C) & Expected & Observed & HTTP & Approx. latency (ms) \\
     \midrule
-    \codepath{deterministic\_high\_temp} & 31.4 & \texttt{fan\_on} & \texttt{fan\_on} & 200 & 437.003 \\
-    \codepath{deterministic\_low\_temp} & 24.5 & \texttt{fan\_off} & \texttt{fan\_off} & 200 & 200.206 \\
+    \codepath{deterministic\_high\_temp} & 31.4 & \texttt{fan\_on} & \texttt{fan\_on} & 200 & 437 \\
+    \codepath{deterministic\_low\_temp} & 24.5 & \texttt{fan\_off} & \texttt{fan\_off} & 200 & 200 \\
     \bottomrule
   \end{tabularx}
 \end{table}
 
-These latency values are full workflow values for the PC-hosted n8n workflow calling the Raspberry Pi middleware. They are separate from direct middleware endpoint latency. The direct endpoint measurements are supporting evidence only because they do not include n8n webhook execution or workflow routing.
+These approximate latency values are full-workflow single-run observations for the PC-hosted n8n workflow calling the Raspberry Pi middleware. They are separate from direct middleware endpoint latency. The direct endpoint measurements are supporting evidence only because they do not include n8n webhook execution or workflow routing.
 
 The Raspberry Pi high-temperature full-workflow latency is slightly lower than the corresponding local deterministic latency. This should not be interpreted as evidence that the Raspberry Pi setup is generally faster. The latency values are single-run observations and can be affected by webhook execution, Docker state, network timing, and normal runtime variation. Repeated runs would be needed before making a stable performance comparison.
 
