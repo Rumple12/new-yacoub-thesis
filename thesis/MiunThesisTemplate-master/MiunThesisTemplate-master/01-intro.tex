@@ -31,17 +31,17 @@ The thesis is guided by three research questions:
 
 \begin{enumerate}
   \item \textbf{RQ1:} How accurately does the deterministic n8n workflow produce the expected fan action for the defined temperature test cases?
-  \item \textbf{RQ2:} How accurately does the minimal agent-enhanced workflow produce contract-valid action output compared with the deterministic baseline for the defined cases?
+  \item \textbf{RQ2:} How accurately does the minimal agent-enhanced workflow produce contract-shaped fan-action output compared with the deterministic baseline for the defined cases?
   \item \textbf{RQ3:} What latency, resource, and deployment behavior is observed during local execution and Raspberry Pi middleware validation?
 \end{enumerate}
 
-Safety is treated as part of the contract and validation analysis rather than as a separate research question. Contract validity is mainly evaluated under RQ2, while the role and limitations of the validation boundary are discussed further in Chapter~\ref{sec:discussion}.
+Safety is treated as part of the contract and validation analysis rather than as a separate research question. In this report, \emph{contract-shaped} means that the observed workflow or agent output follows the expected action fields and supported fan-action values for the defined cases. It should not be read as evidence of full runtime JSON Schema validation or production-grade safety enforcement. The role and limitations of the validation boundary are discussed further in Chapter~\ref{sec:discussion}.
 
 \subsection{Scope}\label{subsec:scope-limitations}
 
 The scope of this thesis is one measurable workflow-to-action pipeline. The implemented system uses a local PC-hosted n8n runtime, a Python middleware API, one temperature-event path, simulated \texttt{fan\_on} and \texttt{fan\_off} actions, a deterministic baseline workflow, a minimal agent-enhanced workflow, shared JSON contracts, a documented minimum safety and validation design, a CSV-based evaluation harness, and Raspberry Pi middleware/action-endpoint validation.
 
-The Raspberry Pi part is used to validate the middleware/action endpoint over the network, while the n8n workflow runtime remains on the PC. The thesis focuses on workflow behavior, contract-valid action output, latency observations, and deployment evidence for the middleware boundary. Full n8n deployment on Raspberry Pi, physical GPIO-based fan control, production-grade runtime safety enforcement, broad multi-agent architecture, multiple models, multiple devices, and large-scale benchmarking are outside the scope.
+The Raspberry Pi part is used to validate the middleware/action endpoint over the network, while the n8n workflow runtime remains on the PC. The thesis focuses on workflow behavior, contract-shaped action output, latency observations, and deployment evidence for the middleware boundary. Full n8n deployment on Raspberry Pi, physical GPIO-based fan control, production-grade runtime safety enforcement, broad multi-agent architecture, multiple models, multiple devices, and large-scale benchmarking are outside the scope.
 
 
 

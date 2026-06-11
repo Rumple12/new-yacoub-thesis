@@ -47,9 +47,11 @@ This result matters because the deterministic path is the reference point for th
 
 The evidence is still tied to the defined cases. The evaluation does not include boundary-value tests around exactly \texttt{30.0 C}, noisy input streams, malformed temperature events, long-duration operation, or concurrent workflow executions. Within the evaluated scenario, the deterministic workflow produced the expected actions; broader operational claims would require additional testing.
 
-\subsection{Discussion of RQ2: Agent-Enhanced Contract-Valid Output}\label{subsec:discussion-rq2-agent}
+\subsection{Discussion of RQ2: Agent-Enhanced Contract-Shaped Output}\label{subsec:discussion-rq2-agent}
 
-RQ2 asks how accurately the minimal agent-enhanced workflow produces contract-valid action output compared with the deterministic baseline for the defined cases. The agent-enhanced workflow produced the expected \texttt{fan\_on} and \texttt{fan\_off} middleware actions for the same two temperature cases, as reported in Table~\ref{tab:agent-results}. The screenshot evidence also shows that the workflow produced structured action output and parsed the action before routing it to the middleware endpoint.
+RQ2 asks how accurately the minimal agent-enhanced workflow produces contract-shaped action output compared with the deterministic baseline for the defined cases. In this report, \emph{contract-shaped} means that the observed output contained the expected action fields and supported fan-action values and could be parsed and routed by the workflow. The agent-enhanced workflow produced the expected \texttt{fan\_on} and \texttt{fan\_off} middleware actions for the same two temperature cases, as reported in Table~\ref{tab:agent-results}. The screenshot evidence also shows that the workflow produced structured action output and parsed the action before routing it to the middleware endpoint. This is different from proving full runtime JSON Schema validation.
+
+The repository contains a JSON Schema for the expected action object, and the safety artifacts describe how validation and approval should work. However, the final evaluated implementation does not include a measured runtime schema-validation gate with validation pass/fail logs. The evidence for RQ2 should therefore be read as evidence of contract-shaped output and workflow-level parsing/routing for the defined cases, not as evidence of production-grade runtime contract enforcement.
 
 The agent path is useful because it tests whether an LLM decision step can be constrained to fit the same action pipeline as the deterministic baseline. In this temperature scenario, the deterministic rule is easier to explain and is sufficient for the action choice. The agent path therefore should not be interpreted as an attempt to outperform the deterministic rule. Its role is to show that generated output can be represented as an action object with fields such as \texttt{action\_id}, \texttt{target}, \texttt{reason}, and \texttt{requires\_approval}, then parsed and routed through the same middleware boundary.
 
@@ -89,7 +91,7 @@ The documented validation design adds a safety-oriented interpretation of the sa
 LLM output should not be passed directly to an action endpoint without checking what it contains. In this thesis, the validation boundary separates generated workflow output from middleware execution. If an output is unclear, risky, or outside the approved action set, it should be reviewed before any action is carried out \cite{humanInTheLoopAmershi2014}.
 
 
-In this implementation, the validation boundary defines the expected behavior for action outputs before they reach the middleware. The safety cases describe which outputs are accepted, blocked, or held back from direct execution. This gives the implementation a clear validation target, while stronger runtime enforcement can be added and measured in future work.
+In this implementation, the validation boundary defines the expected behavior for action outputs before they reach the middleware. The safety cases describe which outputs should be accepted, blocked, or held back from direct execution. They do not show measured runtime enforcement. This gives the implementation a clear validation target, while stronger runtime enforcement, including JSON Schema validation with logged pass/fail outcomes, can be added and measured in future work.
 
 \subsection{Broader Relevance and Possible Use Cases}\label{subsec:discussion-broader-relevance}
 

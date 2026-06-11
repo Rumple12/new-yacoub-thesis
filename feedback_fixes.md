@@ -10,7 +10,8 @@ Source: `C:/Users/Jake_/Downloads/yada2100_feedback.docx`
   - Note: Latency values are now rounded to approximately 2-3 significant figures. The Results overview now states that the reported latency values are single-run observations from the final successful run per defined case, not repeated-trial averages, and no standard deviation is reported.
 - [x] (fixed) Table 7 / Figure 7: use Table 7 as the combined latency table and replace the Raspberry Pi-only graph with a combined graph including Tables 3, 4, and 8.
   - Note: Figure 7 now visualizes all six final full-workflow latency observations from Table 7: local deterministic, local agent-enhanced, and Raspberry Pi validation. Table 8 remains as detailed Raspberry Pi validation evidence.
-- [ ] Hur har "contract-valid" faktiskt verifierats i runtime? Rapporten skiljer mellan kontraktsformad output och faktisk validering, men säkerhets-/valideringsdelen verkar snarare vara dokumenterad design än implementerad och mätt runtime-validering.
+- [x] (fixed) Hur har contract-valid faktiskt verifierats i runtime? Clarified that the thesis demonstrates contract-shaped output and workflow-level parsing/routing, not measured runtime JSON Schema validation or runtime safety enforcement.
+  - Note: The report now distinguishes contract-shaped output from runtime schema validation. It states that full runtime JSON Schema validation and logged safety-enforcement outcomes were not implemented or measured, and that the safety/validation layer is documented design and future work.
 
 ## 2. Comments
 

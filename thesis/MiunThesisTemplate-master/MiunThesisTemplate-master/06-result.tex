@@ -8,6 +8,8 @@ The results cover the evaluated workflow modes, documented validation cases, CSV
 
 The reported latency values are single-run observations from the final successful run for each defined case. They are used to show that the workflow-to-action path was measurable in the implemented proof-of-concept, not to provide a statistical benchmark. Since the evaluation did not include repeated latency trials per case, no standard deviation is reported. For this reason, latency values in the result tables are rounded to approximately two or three significant figures.
 
+For the agent-enhanced workflow, the results use the term \emph{contract-shaped} rather than \emph{runtime schema-validated}. This means that the observed output contained the expected action fields and supported fan-action values and could be parsed and routed by the workflow for the defined cases. The results do not include runtime JSON Schema validation logs or measured safety-enforcement outcomes.
+
 The local workflow results are recorded in raw CSV files, and the processed summaries are stored in the processed result files. Raspberry Pi validation evidence is stored with the Raspberry Pi result artifacts. Full repository paths for these evidence files are listed in Appendix~\ref{sec:appendix-source-code}. Additional screenshots and raw validation evidence are listed in Appendix~\ref{sec:appendix-source-code}.
 
 \subsection{Deterministic Baseline Results}\label{subsec:results-deterministic}
@@ -54,7 +56,7 @@ For the high-temperature case, the evidence reports that the agent selected \tex
   \end{tabularx}
 \end{table}
 
-Both agent CSV rows have \texttt{success=true}. The CSV file records the final observed middleware action, while the screenshot evidence records the structured agent output and parsed action routing. Each latency value in Table~\ref{tab:agent-results} represents one final successful run for the corresponding agent-enhanced test case. Together, the evidence supports the claim that the agent workflow produced contract-shaped \texttt{fan\_on} and \texttt{fan\_off} actions for the defined cases. The evidence is limited to this workflow setup and is not a model comparison or multi-agent evaluation.
+Both agent CSV rows have \texttt{success=true}. The CSV file records the final observed middleware action, while the screenshot evidence records the structured agent output and parsed action routing. Each latency value in Table~\ref{tab:agent-results} represents one final successful run for the corresponding agent-enhanced test case. Together, the evidence supports the claim that the agent workflow produced contract-shaped \texttt{fan\_on} and \texttt{fan\_off} actions for the defined cases and that these supported actions were parsed and routed through the workflow. This should not be read as evidence of full runtime JSON Schema validation. The evidence is limited to this workflow setup and is not a model comparison or multi-agent evaluation.
 
 \subsection{Safety and Validation Case Results}\label{subsec:results-contract-safety}
 
