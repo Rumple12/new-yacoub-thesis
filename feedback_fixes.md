@@ -8,7 +8,8 @@ Source: `C:/Users/Jake_/Downloads/yada2100_feedback.docx`
 - [x] (fixed) Fig. 5 (sid. 24). Här står det "Temp >= 30.0 C", men på andra ställen står det fläkt på vid 31,4 och fläkt av vid 24,5. Hur kommer det sig?
 - [x] (fixed) Tabell 3, 4 och 8: reduce unnecessary decimal precision and clarify number of tests / single-run latency observations.
   - Note: Latency values are now rounded to approximately 2-3 significant figures. The Results overview now states that the reported latency values are single-run observations from the final successful run per defined case, not repeated-trial averages, and no standard deviation is reported.
-- [ ] Tabell 7. Om tabell 8 visualiseras med en graf bör även informationen från tabell 3 och 4 övervägas.
+- [x] (fixed) Table 7 / Figure 7: use Table 7 as the combined latency table and replace the Raspberry Pi-only graph with a combined graph including Tables 3, 4, and 8.
+  - Note: Figure 7 now visualizes all six final full-workflow latency observations from Table 7: local deterministic, local agent-enhanced, and Raspberry Pi validation. Table 8 remains as detailed Raspberry Pi validation evidence.
 - [ ] Hur har "contract-valid" faktiskt verifierats i runtime? Rapporten skiljer mellan kontraktsformad output och faktisk validering, men säkerhets-/valideringsdelen verkar snarare vara dokumenterad design än implementerad och mätt runtime-validering.
 
 ## 2. Comments
