@@ -40,13 +40,13 @@
 \contentsline {section}{\numberline {5}Implementation}{20}{section.5}%
 \contentsline {subsection}{\numberline {5.1}System Overview}{20}{subsection.5.1}%
 \contentsline {subsection}{\numberline {5.2}Local n8n Runtime with Docker}{20}{subsection.5.2}%
-\contentsline {subsection}{\numberline {5.3}Python Middleware API Bridge}{21}{subsection.5.3}%
-\contentsline {subsection}{\numberline {5.4}Shared JSON Contracts}{22}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.3}Python Middleware API Bridge}{22}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Shared JSON Contracts}{23}{subsection.5.4}%
 \contentsline {subsection}{\numberline {5.5}Deterministic Baseline Workflow}{23}{subsection.5.5}%
 \contentsline {subsection}{\numberline {5.6}Agent-Enhanced Workflow}{24}{subsection.5.6}%
 \contentsline {subsection}{\numberline {5.7}Safety and Validation Design}{25}{subsection.5.7}%
 \contentsline {subsection}{\numberline {5.8}Evaluation Harness}{26}{subsection.5.8}%
-\contentsline {subsection}{\numberline {5.9}Raspberry Pi Middleware/Action-Endpoint Validation Setup}{26}{subsection.5.9}%
+\contentsline {subsection}{\numberline {5.9}Raspberry Pi Middleware/Action-Endpoint Validation Setup}{27}{subsection.5.9}%
 \contentsline {subsection}{\numberline {5.10}Summary of Implementation}{27}{subsection.5.10}%
 \contentsline {section}{\numberline {6}Results}{28}{section.6}%
 \contentsline {subsection}{\numberline {6.1}Overview of Evaluated System}{28}{subsection.6.1}%

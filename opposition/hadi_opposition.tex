@@ -1,0 +1,142 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[swedish]{babel}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{parskip}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{titlesec}
+
+\geometry{margin=2.5cm}
+\setstretch{1.15}
+
+\titleformat{\section}{\large\bfseries}{\thesection}{0.8em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{0.8em}{}
+
+\hypersetup{
+  hidelinks,
+  pdftitle={Oppositionsrapport},
+  pdfauthor={Yacoub Dawli}
+}
+
+% TODO: Replace YOURMIUNID in the PDF filename with your real MIUN-ID before submission.
+
+\begin{document}
+
+\pagenumbering{gobble}
+
+\begin{titlepage}
+\centering
+\vspace*{3cm}
+
+{\Large \textbf{Oppositionsrapport}}\\[0.5cm]
+{\large DT099G - Datateknik GR (C), Examensarbete}\\[1.5cm]
+
+{\large \textbf{Rapport som granskas:}}\\[0.2cm]
+{\large Utvärdering av en svensk domänspecifik chatbot baserad på svensk språkmodell och Retrieval-Augmented Generation}\\[0.2cm]
+{\large En jämförelsestudie av GPT-SW3 med och utan RAG}\\[1.0cm]
+
+{\large \textbf{Presenter:} Hadi Awoad}\\[0.4cm]
+{\large \textbf{Opponent:} Yacoub Dawli}\\[0.4cms]
+{\large \textbf{Datum:} \today}\\[3cm]
+
+\vfill
+{\large Mittuniversitetet}\\
+
+\end{titlepage}
+
+\pagenumbering{arabic}
+
+\section{Sammanfattning av arbetet}
+
+Rapporten behandlar utveckling och utvärdering av en svensk domänspecifik chatbot för frågebesvarande över öppna svenska dokument inom konsumenträtt. Arbetet jämför två systemkonfigurationer: en baslinje där GPT-SW3 används utan Retrieval-Augmented Generation, och en RAG-baserad konfiguration där relevanta dokumentsegment hämtas och används som kontext innan svaret genereras.
+
+Syftet är tydligt kopplat till problemet att språkmodellsbaserade system kan ge språkligt övertygande svar utan att dessa nödvändigtvis är tillräckligt korrekta, relevanta eller förankrade i ett kontrollerbart dokumentunderlag. Genom att jämföra svar utan och med dokumenthämtning undersöker arbetet hur extern dokumentbaserad kontext påverkar svarskvaliteten.
+
+Utvärderingen bygger på 15 testfrågor. Svaren bedöms manuellt på en femgradig skala utifrån relevans, korrekthet och källförankring. Även svarstid mäts. Resultaten visar att RAG-konfigurationen förbättrar den genomsnittliga svarskvaliteten jämfört med systemet utan RAG, men att svarstiden samtidigt ökar. Detta gör arbetet relevant eftersom det visar både nyttan och kostnaden med att använda RAG i en svensk domänspecifik chatbot.
+
+\section{Styrkor i rapporten}
+
+En tydlig styrka i arbetet är att jämförelsen mellan systemet utan RAG och systemet med RAG är lätt att förstå. Eftersom samma språkmodell används i båda konfigurationerna blir det tydligare att skillnaderna i resultat främst kan kopplas till om extern dokumentkontext används eller inte.
+
+En annan styrka är att utvärderingskriterierna är relevanta för typen av system som studeras. Relevans, korrekthet och källförankring är viktiga mått för dokumentbaserat frågebesvarande, särskilt när frågorna gäller ett område som konsumenträtt där svar bör kunna kopplas till ett tydligt underlag.
+
+Rapporten är också bra på att visa en praktisk avvägning. Resultaten visar att RAG förbättrar svarskvaliteten, men också att svarstiden ökar. Det är en viktig och realistisk observation, eftersom ett verkligt system behöver balansera kvalitet, källförankring och användarens väntetid.
+
+Jag tycker även att rapportens struktur är tydlig. Den går från bakgrund och teori till metod, implementation, resultat och diskussion på ett sätt som gör arbetet lätt att följa. Avgränsningarna är också rimliga, eftersom arbetet fokuserar på en prototyp och inte försöker hävda att systemet är ett färdigt produktionssystem.
+
+\section{Diskussion och svagheter}
+
+Den viktigaste svagheten eller begränsningen är utvärderingens omfattning. Studien använder 15 testfrågor, vilket är rimligt för en prototyp och ett examensarbete, men det är samtidigt ett begränsat underlag. Resultaten är därför användbara för att analysera den valda prototypen och dokumentdomänen, men bör tolkas försiktigt om man vill dra mer generella slutsatser.
+
+En annan viktig diskussionspunkt är den manuella poängsättningen. Relevans, korrekthet och källförankring är lämpliga kriterier, men de innehåller också en viss grad av subjektiv bedömning. Rapporten hade kunnat stärkas ytterligare om fler än en person hade bedömt svaren, eller om det fanns en tydligare diskussion om hur bedömningen kontrollerades för konsekvens.
+
+Det hade också varit intressant med en djupare felanalys av de svar där RAG-systemet presterade sämre. Eftersom RAG-systemets kvalitet kan påverkas av flera delar, till exempel retrieval-steget, dokumentunderlaget och språkmodellens tolkning av kontexten, hade en tydligare uppdelning av feltyper gjort analysen ännu starkare.
+
+Svarstiden är ytterligare en viktig aspekt. Resultaten visar att RAG ger bättre kvalitet men längre svarstid. Rapporten diskuterar detta, men en ännu tydligare praktisk diskussion hade kunnat visa när den extra väntetiden är acceptabel och när den kan bli ett problem för användaren.
+
+\section{Frågor från den muntliga opponeringen}
+
+Under den muntliga opponeringen fokuserade jag främst på utvärderingens omfattning, manuell bedömning, avvägningen mellan kvalitet och svarstid samt svagheter i RAG-systemets retrieval-process.
+
+\subsection{Fråga 1: Utvärderingens omfattning}
+
+Du använde 15 testfrågor i utvärderingen. Hur kom du fram till att 15 frågor var tillräckligt, och vilken typ av frågor skulle du lägga till om du utökade studien?
+
+Syftet med frågan var att diskutera hur stabilt utvärderingsunderlaget är och hur studien skulle kunna stärkas i framtida arbete. Frågan är relevant eftersom antalet testfrågor påverkar hur säkert man kan tolka resultaten.
+
+\subsection{Fråga 2: Manuell poängsättning}
+
+Du poängsatte chatbot-svaren utifrån relevans, korrekthet och källförankring. Eftersom dessa kriterier kan innebära en viss grad av subjektiv bedömning, hur säkerställde du att poängsättningen var konsekvent? Och tror du att utvärderingen hade blivit starkare om fler än en person hade poängsatt svaren?
+
+Syftet med frågan var att diskutera reliabiliteten i den manuella bedömningen. Frågan är relevant eftersom fasta kriterier och en poängskala hjälper, men flera bedömare hade kunnat göra resultaten mer robusta.
+
+\subsection{Fråga 3: Avvägning vid RAG}
+
+Dina resultat visar att RAG förbättrade svarskvaliteten men också ökade svarstiden. I ett verkligt system, hur skulle du avgöra om kvalitetsförbättringen är värd den extra väntetiden?
+
+Syftet med frågan var att koppla resultatet till praktisk användning. För användare kan högre kvalitet vara viktigare än snabbhet i vissa domäner, men i andra situationer kan lång svarstid påverka användbarheten negativt.
+
+\subsection{Fråga 4: Svagheter i sökprocessen}
+
+När RAG-systemet gav sämre svar, tror du att huvudproblemet oftast låg i söksteget, språkmodellen eller de tillgängliga dokumenten?
+
+Syftet med frågan var att diskutera var svagheterna i RAG-kedjan uppstår. Ett RAG-system är beroende av att rätt dokumentsegment hämtas, att modellen tolkar dem korrekt och att dokumentunderlaget faktiskt innehåller informationen som behövs.
+
+
+\subsection{Sammanfattning av respondentens svar och diskussion}
+
+Under den muntliga opponeringen förklarade respondenten att antalet testfrågor valdes med hänsyn till arbetets omfattning och tidsram. Studien var avgränsad till en prototyp och syftet var främst att jämföra två systemkonfigurationer under samma förutsättningar. Respondenten lyfte även att fler frågor hade kunnat stärka utvärderingen, särskilt frågor med varierande svårighetsgrad och frågor som kräver information från flera delar av dokumentunderlaget.
+
+Vid diskussionen om manuell poängsättning sa han att samma bedömningskriterier och samma femgradiga skala användes för samtliga svar. Detta gjorde bedömningen mer konsekvent. Samtidigt konstaterades att manuell bedömning innebär en viss grad av subjektivitet och att fler än en bedömare hade kunnat stärka reliabiliteten i framtida arbete.
+
+När det gäller avvägningen mellan svarskvalitet och svarstid beskrev respondenten att RAG är mest motiverat i situationer där korrekthet och källförankring är viktigare än snabbast möjliga svar. I en praktisk tillämpning behöver man därför väga användarens behov av tillförlitliga svar mot den ökade väntetiden.
+
+I diskussionen om svagheter i RAG-systemet framkom att svagare svar kan bero på flera delar av kedjan. Retrieval-steget är centralt, eftersom fel eller otillräckliga textsegment ger språkmodellen sämre underlag. Samtidigt kan även språkmodellens tolkning och dokumentunderlagets täckning påverka resultatet. En tydligare felanalys hade därför varit ett relevant framtida förbättringsområde.
+
+
+
+\section{Förslag på förbättringar}
+
+Ett första förbättringsförslag är att utöka utvärderingen med fler testfrågor. Det skulle göra det möjligt att testa fler typer av frågor, exempelvis enklare faktafrågor, mer komplexa frågor, frågor där svaret finns i flera dokument och frågor där svaret är svårt att hitta i dokumentunderlaget.
+
+Ett andra förbättringsförslag är att använda fler än en bedömare vid poängsättningen. Detta skulle stärka reliabiliteten i bedömningen och göra det möjligt att jämföra om olika bedömare tolkar relevans, korrekthet och källförankring på samma sätt.
+
+Ett tredje förbättringsförslag är att göra en mer detaljerad felanalys. För varje svagt svar skulle man kunna undersöka om problemet beror på retrieval-steget, språkmodellens tolkning, promptens utformning eller dokumentunderlagets begränsningar. Det skulle göra framtida förbättringar mer riktade.
+
+Ett fjärde förbättringsförslag är att analysera svarstiden mer praktiskt. Rapporten visar att RAG ökar svarstiden, men det hade varit intressant att diskutera olika användningsscenarier där längre svarstid antingen är acceptabel eller problematisk. Det hade också varit relevant att diskutera möjliga optimeringar, till exempel bättre chunking, färre hämtade segment, caching eller snabbare retrieval.
+
+\section{Helhetsbedömning}
+
+Min helhetsbedömning är att rapporten är tydlig, relevant och väl avgränsad. Ämnet är aktuellt eftersom det handlar om svenska språkmodeller, dokumentbaserat frågebesvarande och användning av RAG i en svensk domän. Rapporten visar på ett tydligt sätt att RAG kan förbättra svarskvaliteten, men också att förbättringen kommer med en kostnad i form av längre svarstid.
+
+Arbetet uppfyller sitt syfte genom att utveckla en prototyp och jämföra två systemkonfigurationer på ett strukturerat sätt. Metoden är rimlig för arbetets omfattning och resultaten tolkas på ett försiktigt och trovärdigt sätt.
+
+De viktigaste förbättringsområdena handlar inte om att arbetet är otydligt, utan om att göra utvärderingen starkare. Fler testfrågor, fler bedömare och en djupare felanalys hade gjort slutsatserna mer tillförlitliga och gett en tydligare bild av när RAG fungerar bäst och när det fortfarande har begränsningar.
+
+Sammanfattningsvis är detta ett relevant och väl genomfört examensarbete med en tydlig jämförelse, rimliga avgränsningar och intressanta resultat. Rapporten visar både potentialen med RAG för svensk dokumentbaserad frågebesvarande och de praktiska begränsningar som kvarstår.
+
+\end{document}

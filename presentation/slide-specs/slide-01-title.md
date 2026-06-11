@@ -9,6 +9,11 @@ for IoT-Style Fan Control
 
 PC-hosted n8n, Python middleware, and Raspberry Pi middleware validation
 
+Research questions:
+RQ1: How accurately does the deterministic workflow produce expected fan actions?
+RQ2: How accurately does the agent-enhanced workflow produce contract-valid action output?
+RQ3: What latency, resource, and deployment behavior is observed locally and in Pi middleware validation?
+
 Yacoub Dawli
 DT099G Bachelor Thesis
 Mid Sweden University

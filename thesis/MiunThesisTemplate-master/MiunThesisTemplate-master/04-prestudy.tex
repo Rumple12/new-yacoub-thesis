@@ -25,7 +25,7 @@ Real GPIO fan control was also considered outside the current scope. Physical ha
 
 \subsection{Chosen System Design}\label{subsec:chosen-system-design}
 
-The chosen architecture is a PC-hosted n8n workflow system with a Python middleware boundary and lightweight evaluation support. n8n runs on the PC using Docker. It receives a temperature event or test input, then executes either the deterministic workflow path or the minimal agent-enhanced workflow path. The deterministic path uses a threshold rule. The agent-enhanced path produces structured action output that is expected to match the shared action contract.
+The chosen architecture is a PC-hosted n8n workflow system with a Python middleware boundary and lightweight evaluation support. n8n runs on the PC using Docker. The evaluation setup invokes one of two separate PC-hosted n8n workflow modes for a given run. In the deterministic baseline mode, the workflow applies a fixed threshold rule. In the minimal agent-enhanced mode, a separate workflow produces structured action output that is expected to match the shared action contract. The selected evaluation mode therefore determines which workflow is executed, rather than a single workflow dynamically choosing between modes.
 
 The shared JSON contracts define the sensor-event and action-output boundary. The documented validation design describes which outputs are allowed, which malformed outputs should be blocked, and which risky or unknown outputs should not be executed directly. The Python middleware exposes the API/action endpoints used by the workflows. The evaluation harness records raw and processed CSV files so that workflow behavior, latency, and resource observations can be reported.
 

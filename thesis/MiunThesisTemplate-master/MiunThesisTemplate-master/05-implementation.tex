@@ -12,7 +12,9 @@ This chapter describes the implemented proof-of-concept system. The implementati
 
 The overall architecture was introduced in Chapter~\ref{sec:system-design} and shown in Figure~\ref{fig:final-architecture}. This chapter focuses on how the implemented components were realized and connected.
 
-The implemented system follows a temperature-event-to-action pipeline: a test input enters the PC-hosted n8n workflow, the workflow selects either the deterministic or agent-enhanced path, the resulting action is represented through the shared contract and documented validation boundary, and the Python middleware routes the request to a simulated \texttt{fan\_on} or \texttt{fan\_off} action. The evaluation harness then records the resulting behavior as CSV evidence.
+The implemented system follows a temperature-event-to-action pipeline. A test input enters one of the two evaluated PC-hosted n8n workflow modes. In the deterministic baseline run, n8n applies the fixed temperature-threshold rule. In the agent-enhanced run, a separate minimal agent-enhanced workflow produces structured action output for the same defined temperature cases. The selected mode therefore determines which workflow is executed; the workflow does not dynamically choose between the deterministic and agent-enhanced modes at runtime.
+
+In both modes, the resulting action is represented through the shared contract and documented validation boundary, and the Python middleware routes the request to a simulated \texttt{fan\_on} or \texttt{fan\_off} action. The evaluation harness then records the resulting behavior as CSV evidence.
 
 The following sections describe the local n8n runtime, the Python middleware API, the shared contract layer, the deterministic and agent-enhanced workflows, the documented validation design, the evaluation harness, and the Raspberry Pi middleware/action-endpoint validation.
 
