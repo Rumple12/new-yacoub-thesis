@@ -15,12 +15,16 @@ Source: `C:/Users/Jake_/Downloads/yada2100_feedback.docx`
 
 ## 2. Comments
 
-- [ ] Ta bort list of figures och list of tables eftersom de tillför lite och ska blockas bort ur mallen.
-- [ ] Se till att terminologitabellen hamnar på samma sida som rubriken.
-- [ ] Fig. 1. Gör bilden större och använd en pil som svänger 180 grader så flödet kan delas upp på två rader.
-- [ ] Fig. 2. Begränsningsrutan är förvirrande; förskjut bilden i förhållande till texten så att en halv tom sida undviks.
+- [x] (fixed) Remove List of Figures and List of Tables.
+- [x] (fixed) Keep Terminology / Notation table on the same page as its heading.
+  - Note: Removed front-matter List of Figures and List of Tables from thesis.tex. Changed the terminology table to a non-floating [H] table and started the terminology section cleanly so the heading and table remain together.
+- [x] (fixed) Fig. 1: make image larger/readable by splitting the workflow diagram into two rows with a return/downward flow.
+  - Note: Replaced the wide one-row Figure 1 with a two-row version of the same conceptual event-to-action chain. The LaTeX include now uses normal text width so the diagram is larger and easier to read.
+- [x] (fixed) Fig. 2: remove confusing scope-limits box and adjust figure placement to avoid half-empty page.
+  - Note: Removed the scope-limits box from the architecture diagram and kept scope limitations in the surrounding text. Changed Figure 2 placement from forced [H] to flexible placement with max height so the figure no longer causes a large blank area before it.
 
 ## 3. References / formatting
 
-- [ ] Referenslistan. Ta bort information om vilka sidor källorna refereras på.
+- [x] (fixed) Reference list: remove page-reference/backref information from bibliography.
+  - Note: Removed the biblatex `backref` option from miunthesis.cls so the reference list no longer lists the pages where each source is cited.
 - [ ] Referenslistan. Se över att referenserna är fullständiga, till exempel IEEE-poster på s. 38-40 som saknar konferens/journal samt eventuella sid- och volymnummer.

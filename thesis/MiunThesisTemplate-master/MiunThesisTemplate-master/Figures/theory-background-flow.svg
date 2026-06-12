@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="760" viewBox="0 0 1800 760" role="img" aria-label="Conceptual event-to-action pattern used to frame the thesis">
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#222222" />
+    </marker>
+    <style>
+      text { font-family: Arial, sans-serif; font-size: 32px; fill: #111827; text-anchor: middle; dominant-baseline: middle; }
+      .edge { fill: none; stroke: #222222; stroke-width: 3; marker-end: url(#arrow); }
+      .node { fill: #f8fafc; stroke: #475569; stroke-width: 3; }
+      .decision { fill: #eef6ff; stroke: #3b6ea8; stroke-width: 3; }
+      .boundary { fill: #fff4e5; stroke: #b7791f; stroke-width: 3; }
+      .action { fill: #fff1f2; stroke: #be123c; stroke-width: 3; }
+    </style>
+  </defs>
+  <rect width="1800" height="760" fill="#ffffff" />
+  <path class="edge" d="M290 168 L370 168" />
+  <path class="edge" d="M700 168 L755 168" />
+  <path class="edge" d="M895 168 C945 120 965 108 1010 108" />
+  <path class="edge" d="M895 168 C945 220 965 268 1010 268" />
+  <path class="edge" d="M1310 108 C1380 108 1410 168 1480 168" />
+  <path class="edge" d="M1340 268 C1400 268 1415 168 1480 168" />
+  <path class="edge" d="M1610 206 L1610 430 L225 430 L225 560" />
+  <path class="edge" d="M350 598 L430 598" />
+  <path class="edge" d="M700 598 L780 598" />
+  <path class="edge" d="M1040 598 L1120 598" />
+  <rect class="node" x="60" y="130" width="230" height="76" />
+  <text x="175" y="168">Sensor / event</text>
+  <rect class="node" x="370" y="130" width="330" height="76" />
+  <text x="535" y="168">Workflow orchestration</text>
+  <polygon class="decision" points="825,98 895,168 825,238 755,168" />
+  <text x="825" y="168" font-size="26px">Decision</text>
+  <rect class="node" x="1010" y="70" width="300" height="76" />
+  <text x="1160" y="108">Deterministic rule</text>
+  <rect class="node" x="1010" y="230" width="330" height="76" />
+  <text x="1175" y="268">Agent-enhanced step</text>
+  <rect class="node" x="1480" y="130" width="260" height="76" />
+  <text x="1610" y="168">Structured action</text>
+  <rect class="node" x="100" y="560" width="250" height="76" />
+  <text x="225" y="598">JSON contract</text>
+  <rect class="boundary" x="430" y="560" width="270" height="76" />
+  <text x="565" y="598">Validation / HITL</text>
+  <rect class="action" x="780" y="560" width="260" height="76" />
+  <text x="910" y="598">Middleware API</text>
+  <rect class="action" x="1120" y="560" width="420" height="76" />
+  <text x="1330" y="598">IoT-style action endpoint</text>
+</svg>

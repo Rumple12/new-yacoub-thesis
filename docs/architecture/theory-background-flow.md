@@ -1,22 +1,30 @@
 # Theory Background Flow
 
 ```mermaid
-flowchart LR
-  A["Sensor / event"] --> B["Workflow orchestration"]
-  B --> C{"Decision"}
-  C --> D["Deterministic rule"]
-  C --> E["Agent-enhanced step"]
-  D --> F["Structured action"]
-  E --> F
-  F --> G["JSON contract"]
-  G --> H["Validation / HITL"]
-  H --> I["Middleware API"]
-  I --> J["IoT-style action endpoint"]
+flowchart TB
+  subgraph TOP[" "]
+    direction LR
+    A["Sensor / event"] --> B["Workflow orchestration"] --> C{"Decision"}
+    C --> D["Deterministic rule"]
+    C --> E["Agent-enhanced step"]
+    D --> F["Structured action"]
+    E --> F
+  end
+
+  subgraph BOTTOM[" "]
+    direction LR
+    G["JSON contract"] --> H["Validation / HITL"] --> I["Middleware API"] --> J["IoT-style action endpoint"]
+  end
+
+  %% Row-to-row connector represents Structured action continuing to JSON contract.
+  TOP --> BOTTOM
 
   classDef node fill:#f8fafc,stroke:#475569,color:#111827;
   classDef decision fill:#eef6ff,stroke:#3b6ea8,color:#111827;
   classDef boundary fill:#fff4e5,stroke:#b7791f,color:#111827;
   classDef action fill:#fff1f2,stroke:#be123c,color:#111827;
+  style TOP fill:transparent,stroke:transparent;
+  style BOTTOM fill:transparent,stroke:transparent;
 
   class A,B,D,E,F,G node;
   class C decision;
