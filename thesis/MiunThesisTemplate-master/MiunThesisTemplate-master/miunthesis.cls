@@ -61,7 +61,7 @@
 \RequirePackage{varioref, prettyref}
 \RequirePackage{hyperref}
 \RequirePackage{cleveref}
-\RequirePackage[backend=biber,citestyle=ieee]{biblatex}
+\RequirePackage[backend=biber,style=ieee]{biblatex}
 
 \setlength\bibitemsep{0.5\baselineskip}
 

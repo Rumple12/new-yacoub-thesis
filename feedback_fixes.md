@@ -27,4 +27,5 @@ Source: `C:/Users/Jake_/Downloads/yada2100_feedback.docx`
 
 - [x] (fixed) Reference list: remove page-reference/backref information from bibliography.
   - Note: Removed the biblatex `backref` option from miunthesis.cls so the reference list no longer lists the pages where each source is cited.
-- [ ] Referenslistan. Se över att referenserna är fullständiga, till exempel IEEE-poster på s. 38-40 som saknar konferens/journal samt eventuella sid- och volymnummer.
+- [x] Referenslistan. Se över att referenserna är fullständiga, till exempel IEEE-poster på s. 38-40 som saknar konferens/journal samt eventuella sid- och volymnummer.
+  - Note: IEEE-related references were checked so the reference list shows full journal names such as Proceedings of the IEEE, IEEE Internet of Things Journal, and IEEE Access, with volume/page/DOI fields where applicable. Page backrefs remain disabled.
